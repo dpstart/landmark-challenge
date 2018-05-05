@@ -1,0 +1,19 @@
+language: ruby
+cache: bundler
+sudo: false
+notifications:
+  email:
+    recipients:
+      - daniele97bsk@gmail.com
+    on_success: always
+    on_failure: always
+rvm:
+  - 2.5.1
+before_install:
+  - gem update --system
+  - gem --version
+install: gem install rails
+gemfile: src/Gemfile
+script: 
+  - src/bin/rails server
+
