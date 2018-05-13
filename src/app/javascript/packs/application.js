@@ -12,7 +12,6 @@ import Vue from 'vue/dist/vue.esm.js'
 import Vuetify from 'vuetify'
 import App from '../components/app.vue'
 
-
 Vue.use(Vuetify)
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: 'app',
     template: '<App/>',
-    components: { App }
+    components: { App }, 
   })
  
-  console.log(app)
+  //console.log(app)
 
 })

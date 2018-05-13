@@ -28,22 +28,23 @@
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Landmark Challenge</v-toolbar-title>
     </v-toolbar>
     <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2017</span>
+      <span class="white--text">&copy; 2018</span>
     </v-footer>
   </v-app>
   </div>
 </template>
 
 <script>
+
   export default {
     data: () => ({
       drawer: null
     }),
     props: {
       source: String
-    }
+    },
   }
 </script>
