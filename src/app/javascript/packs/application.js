@@ -9,7 +9,11 @@
 
 
 import Vue from 'vue/dist/vue.esm.js'
+import Vuetify from 'vuetify'
 import App from '../components/app.vue'
+
+
+Vue.use(Vuetify)
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('app'))
@@ -18,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     template: '<App/>',
     components: { App }
   })
-
+ 
   console.log(app)
+
 })
