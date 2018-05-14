@@ -2,6 +2,8 @@ require 'colorize'
 
 class UsersController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def index
 		log_info('UsersController >>> \'index\' action invoked')
 		@users = User.all
