@@ -5842,6 +5842,13 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-googlemaps@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/vue-googlemaps/-/vue-googlemaps-0.0.6.tgz#80f18f5b0f42cf8b211986aef957345308a79e1a"
+  dependencies:
+    vue-observe-visibility "^0.3.0"
+    vue-resize "^0.4.1"
+
 vue-hot-reload-api@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
