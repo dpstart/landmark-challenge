@@ -30,6 +30,16 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Landmark Challenge</v-toolbar-title>
     </v-toolbar>
+
+      <v-layout>
+        <v-flex xs12 sm6 offset-sm3>
+          <google-map
+            style="width: 100%; height: 100%; position: relative; left:0; top:0"
+            name="example"
+          ></google-map>
+        </v-flex>
+    </v-layout>
+
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2018</span>
     </v-footer>
@@ -38,6 +48,7 @@
 </template>
 
 <script>
+
 
   export default {
     data: () => ({
