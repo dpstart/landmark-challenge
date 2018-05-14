@@ -9,11 +9,25 @@
 
 
 import Vue from 'vue/dist/vue.esm.js'
+import Router from 'vue-router'
 import Vuetify from 'vuetify'
 import App from '../components/app.vue'
 
-import Map from '../components/map.vue';
+import Map from '../components/map.vue'
+import Home from '../components/home.vue'
+import Profile from '../components/profile.vue'
 
+
+
+Vue.use(Router)
+
+
+const router =  new Router({
+  routes:  [
+    { path: '/', component: Home },
+    { path: '/profile', name: "Profile",  component: Profile }
+  ]
+})
 
 Vue.component('google-map', Map)
 
@@ -25,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const app = new Vue({
     el: 'app',
+    router,
     template: '<App/>',
     components: { App }, 
+  render: h => h(App)
   })
- 
-
 })

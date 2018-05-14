@@ -2,6 +2,7 @@
   "dependencies": {
     "mapbox-gl-vue": "^1.8.2",
     "vue-googlemaps": "^0.0.6",
+    "vue-router": "^3.0.1",
     "vuetify": "^1.0.17"
   }
 }

@@ -18,10 +18,10 @@
         </v-list-tile>
         <v-list-tile @click="">
           <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
+            <v-icon>account_circle</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>Profile</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -29,16 +29,16 @@
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Landmark Challenge</v-toolbar-title>
+       <v-spacer></v-spacer>
+        <v-btn :to="{name: 'Profile'}"icon>
+            <v-icon style="font-size: 35px;">account_circle</v-icon>
+        </v-btn>
+       
     </v-toolbar>
 
-      <v-layout>
-        <v-flex xs12 sm6 offset-sm3>
-          <google-map
-            style="width: 100%; height: 100%; position: relative; left:0; top:0"
-            name="example"
-          ></google-map>
-        </v-flex>
-    </v-layout>
+      <v-content>
+       <router-view></router-view>
+      </v-content>
 
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2018</span>
@@ -59,3 +59,5 @@
     },
   }
 </script>
+
+
