@@ -12,10 +12,24 @@ import Vue from 'vue/dist/vue.esm.js'
 import Vuetify from 'vuetify'
 import App from '../components/app.vue'
 
+import 'vue-googlemaps/dist/vue-googlemaps.css'
+import VueGoogleMaps from 'vue-googlemaps'
+
+
+
 Vue.use(Vuetify)
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('app'))
+
+  Vue.use(VueGoogleMaps, {
+    load: {
+      apiKey: 'AIzaSyANUSGIB54XCmeFbG4Vs6u5sGGWD7wwjb8',
+      libraries: ['places'],
+    },
+  })
+
+  
   const app = new Vue({
     el: 'app',
     template: '<App/>',
