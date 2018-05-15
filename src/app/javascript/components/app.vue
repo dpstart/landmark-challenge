@@ -7,16 +7,16 @@
       fixed
       app
     >
-      <v-list dense>
-        <v-list-tile @click="">
+      <v-list dense v-if="$route.name in ['Login', 'Register']">
+        <v-list-tile :to="{name: 'Home'}" @click="">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title >Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile :to="{name: 'Profile'}" @click="">
           <v-list-tile-action>
             <v-icon>account_circle</v-icon>
           </v-list-tile-action>
@@ -26,7 +26,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="indigo" dark fixed app v-if="$route.name in ['Login', 'Register']">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Landmark Challenge</v-toolbar-title>
        <v-spacer></v-spacer>

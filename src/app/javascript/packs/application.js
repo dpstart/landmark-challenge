@@ -16,6 +16,8 @@ import App from '../components/app.vue'
 import Map from '../components/map.vue'
 import Home from '../components/home.vue'
 import Profile from '../components/profile.vue'
+import Login from '../components/login.vue'
+import Register from '../components/register.vue'
 
 
 
@@ -24,8 +26,10 @@ Vue.use(Router)
 
 const router =  new Router({
   routes:  [
-    { path: '/', component: Home },
-    { path: '/profile', name: "Profile",  component: Profile }
+    { path: '/', name:"Home", component: Home },
+    { path: '/profile', name: "Profile",  component: Profile },
+    { path: '/login', name: "Login",  component: Login },
+    { path: '/register', name: "Register",  component: Register}
   ]
 })
 
