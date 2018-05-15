@@ -17,7 +17,7 @@
               <v-card-actions>
                 <a color="primary" style="margin-left:10px"><router-link to="/login">LOGIN</router-link></a>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary">Sign up</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

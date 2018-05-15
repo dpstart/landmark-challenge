@@ -7,7 +7,7 @@
       fixed
       app
     >
-      <v-list dense v-if="$route.name in ['Login', 'Register']">
+      <v-list dense v-if="['Login', 'Register'].indexOf($route.name) <0">
         <v-list-tile :to="{name: 'Home'}" @click="">
           <v-list-tile-action>
             <v-icon>home</v-icon>
@@ -26,7 +26,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app v-if="$route.name in ['Login', 'Register']">
+    <v-toolbar color="indigo" dark fixed app v-if="['Login', 'Register'].indexOf($route.name) < 0">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Landmark Challenge</v-toolbar-title>
        <v-spacer></v-spacer>
