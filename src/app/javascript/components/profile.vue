@@ -7,7 +7,7 @@
             <v-card-media  src="https://cdn.designsmaz.com/wp-content/uploads/2014/10/ceystalhorizon.png" height="300px">
             </v-card-media>
               <v-card-title class="justify-center">
-                  <v-avatar class="avatar" size="150">
+                  <v-avatar class="vavatar" size="150">
                     <img  src="https://vuetifyjs.com/static/doc-images/john.jpg" alt="John">
                 </v-avatar>
               </v-card-title>
@@ -35,7 +35,16 @@ export default {
     return {
  
     } 
-  }  
+  },
+  beforeRouteEnter (to, from, next) {
+  // called before the route that renders this component is confirmed.
+  // does NOT have access to `this` component instance,
+  // because it has not been created yet when this guard is called!
+      if(!(!!localStorage.getItem("token"))){
+          next(false)
+      }
+      else next()
+  },  
 }
 
 </script>
@@ -45,7 +54,7 @@ export default {
   .headline {
     color: #1976D2;
   }
-  .avatar {
+  .vavatar {
     position: absolute;
     bottom : 85px;
   }

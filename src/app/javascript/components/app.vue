@@ -118,6 +118,7 @@
     methods: {
       logout () {
         this.$store.dispatch('logout');
+        this.$router.push('/')
         this.drawer =  false;
       }
     },
