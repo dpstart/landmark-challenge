@@ -56,8 +56,18 @@
        <v-spacer></v-spacer>
        <v-toolbar-items class="hidden-sm-and-down">
 
+         <v-btn
+          class="white--text"
+          v-if="isLoggedIn"
+          color="primary"
+          :to="{name: 'Drop'}"
+        >
+          Upload picture
+          <v-icon right dark>cloud_upload</v-icon>
+        </v-btn>
+
           <v-menu offset-y>
-            <v-btn  slot="activator" color="primary" dark>
+            <v-btn  flat slot="activator"  dark>
               {{ current.title }}
               <v-icon right dark>arrow_drop_down</v-icon>
               </v-btn>
@@ -122,7 +132,7 @@
 </script>
 
 <style scoped>
-  a {
+  a, .city-btn {
     text-decoration: none;
     color: white;
   }

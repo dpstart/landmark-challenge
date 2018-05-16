@@ -19,6 +19,7 @@ import Home from '../components/home.vue'
 import Profile from '../components/profile.vue'
 import Login from '../components/login.vue'
 import Register from '../components/register.vue'
+import Drop from '../components/drop.vue'
 
 Vue.use(Router)
 
@@ -28,7 +29,8 @@ const router =  new Router({
     { path: '/', name: "Home", component: Home },
     { path: '/profile', name: "Profile",  component: Profile },
     { path: '/login', name: "Login",  component: Login },
-    { path: '/register', name: "Register",  component: Register}
+    { path: '/register', name: "Register",  component: Register},
+    { path: '/drop', name: "Drop",  component: Drop}
   ]
 })
 
