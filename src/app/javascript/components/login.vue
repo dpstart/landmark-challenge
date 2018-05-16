@@ -9,7 +9,7 @@
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form lazy-validation>
+                <v-form ref="form" lazy-validation>
                   <v-text-field 
                     :rules="emailRules" 
                     required v-model="email" 
@@ -74,7 +74,16 @@
                 });
             }
         }
-    }
+    },
+    beforeRouteEnter (to, from, next) {
+    // called before the route that renders this component is confirmed.
+    // does NOT have access to `this` component instance,
+    // because it has not been created yet when this guard is called!
+        if(!!localStorage.getItem("token")){
+            next(false)
+        }
+        else next()
+    },
   }
 </script>
 
