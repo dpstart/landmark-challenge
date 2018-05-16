@@ -11,7 +11,7 @@
                     <img  src="https://vuetifyjs.com/static/doc-images/john.jpg" alt="John">
                 </v-avatar>
               </v-card-title>
-              <v-card-text>
+              <v-card-text class="cardtext">
                 <div>
                   <h3  class="headline mb-0">John Doe</h3>
                   <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
@@ -49,18 +49,17 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
   .headline {
     color: #1976D2;
   }
   .vavatar {
-    position: absolute;
     bottom : 85px;
   }
 
-  .card__text {
-    position: absolute;
+  .cardtext {
+    position:absolute;
     bottom: 30px;
   }
 </style>

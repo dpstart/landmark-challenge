@@ -106,7 +106,12 @@ export default {
       const position = new google.maps.LatLng(data.latitude, data.longitude);
       const marker = new google.maps.Marker({ 
         position,
-        map: this.map
+        map: this.map,
+        icon: {
+          size: new google.maps.Size(50, 50),
+          scaledSize: new google.maps.Size(50, 50),
+          url: "https://png.icons8.com/color/1600/map-pin.png"
+        }
       });
       marker.setTitle(data.name);
       this.markers.push(marker)
@@ -129,4 +134,5 @@ export default {
   margin: 0 auto;
   background: gray;
 }
+
 </style>
