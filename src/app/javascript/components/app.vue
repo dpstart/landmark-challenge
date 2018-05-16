@@ -55,8 +55,20 @@
       <v-toolbar-title style="cursor:pointer"><router-link to="/">Landmark Challenge</router-link></v-toolbar-title>
        <v-spacer></v-spacer>
        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn :to="{name: 'Profile'}" icon v-if="isLoggedIn">
-              <v-icon style="font-size: 35px;">account_circle</v-icon>
+
+          <v-menu offset-y>
+            <v-btn  slot="activator" color="primary" dark>
+              {{ current.title }}
+              <v-icon right dark>arrow_drop_down</v-icon>
+              </v-btn>
+            <v-list>
+              <v-list-tile v-for="(item, index) in items" :key="index" @click="current=item">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+          <v-btn :to="{name: 'Profile'}" flat v-if="isLoggedIn">
+              Profile
           </v-btn>
           <v-btn flat @click="logout" v-if="isLoggedIn">
               Logout
@@ -70,9 +82,7 @@
        </v-toolbar-items>
     </v-toolbar>
 
-      <v-content>
-       <router-view></router-view>
-      </v-content>
+      <router-view></router-view>
 
     <v-footer color="indigo" app>
       <span class="white--text footer-body">&copy; 2018</span>
@@ -86,7 +96,13 @@
 
   export default {
     data: () => ({
-      drawer: false
+      drawer: false,
+
+      items: [
+        { title: 'Rome' },
+      ],
+
+      current:  { title: "Rome" }
     }),
     props: {
       source: String
@@ -114,6 +130,10 @@
   .footer-body {
     margin-left: 10px;
   }
+
+  /*.dropdown-icon {
+    margin-right:7px;
+  }*/
 
 </style>
 
