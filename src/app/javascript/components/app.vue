@@ -8,7 +8,7 @@
       app
     >
       <v-list dense>
-        <v-list-tile :to="{name: 'Home'}" >
+        <v-list-tile :to="{name: 'Home'}" @click.stop="drawer = !drawer">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>

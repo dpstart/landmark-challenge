@@ -9,14 +9,26 @@
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form>
-<<<<<<< HEAD
-                  <v-text-field prepend-icon="person" name="login" label="Email" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
-=======
-                  <v-text-field v-model="email" prepend-icon="person" name="Email" label="Login" type="text"></v-text-field>
-                  <v-text-field v-model="password" id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
->>>>>>> vuex-signup
+                <v-form lazy-validation>
+                  <v-text-field 
+                    :rules="emailRules" 
+                    required v-model="email" 
+                    prepend-icon="person" 
+                    name="Email" 
+                    label="Email" 
+                    type="text"
+                    >
+                  </v-text-field>
+                  <v-text-field 
+                    :rules="passwordRules" 
+                    required 
+                    v-model="password" 
+                    id="password" 
+                    prepend-icon="lock" 
+                    name="password" 
+                    label="Password" 
+                    type="password">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -38,19 +50,29 @@
     data: () => ({
       drawer: null,
       email: "",
-      password: ""
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
+      password: "",
+      passwordRules: [
+          v => !!v || 'Password is required',
+      ]
     }),
     props: {
       source: String
     },
     methods: {
         login() {
-            this.$store.dispatch("login", {
-                email: this.email,
-                password: this.password
-            }).then(() => {
-                this.$router.push("/")
-            });
+
+            if (this.$refs.form.validate()) {
+                this.$store.dispatch("login", {
+                    email: this.email,
+                    password: this.password
+                }).then(() => {
+                    this.$router.push("/")
+                });
+            }
         }
     }
   }
