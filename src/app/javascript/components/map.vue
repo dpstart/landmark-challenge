@@ -9,14 +9,12 @@ export default {
     return {
       mapName: this.name + "-map",
       markerCoordinates: [{
-        latitude: 51.501527,
-        longitude: -0.1921837
-      }, {
-        latitude: 51.505874,
-        longitude: -0.1838486
-      }, {
-        latitude: 51.4998973,
-        longitude: -0.202432
+        latitude: 41.8902,
+        longitude: 12.4922
+      },
+      {
+        latitude: 41.879040, 
+        longitude: 12.492439
       }],
       map: null,
       bounds: null,
