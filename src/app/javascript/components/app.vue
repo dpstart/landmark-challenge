@@ -8,7 +8,7 @@
       app
     >
       <v-list dense>
-        <v-list-tile :to="{name: 'Home'}" @click.stop="drawer = !drawer">
+        <v-list-tile :to="{name: 'Home'}" >
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -75,7 +75,7 @@
       </v-content>
 
     <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2018</span>
+      <span class="white--text footer-body">&copy; 2018</span>
     </v-footer>
   </v-app>
   </div>
@@ -110,6 +110,11 @@
     text-decoration: none;
     color: white;
   }
+
+  .footer-body {
+    margin-left: 10px;
+  }
+
 </style>
 
 
