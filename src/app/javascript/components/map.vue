@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+    <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm12 md6 offset-md1>
@@ -29,9 +29,12 @@
           </v-flex>
         </v-layout>
       </v-container>
-  </v-content>
+    </v-content>
 </template>
+
 <script>
+
+//TODO: Sepearate into 2 components, use vuex to communicate.
 
 function getContentString (name, desc) {
 
@@ -57,6 +60,8 @@ export default {
       bounds: null,
       markers: [],
 
+      gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
+
       monumentData: [
         { name: "Colosseo", 
           desc: "The Colosseum or Coliseum also known as the Flavian Amphitheatre is an oval amphitheatre in the centre of the city of Rome, Italy.",
@@ -81,7 +86,6 @@ export default {
             content: getContentString(this.monumentData[index].name, this.monumentData[index].desc)
            });
         
-        console.log(this.markers[i].getPosition().lat());
         if(this.markers[i].getTitle() == this.monumentData[index].name){
           infowindow.open(this.map, this.markers[i]);
           break;

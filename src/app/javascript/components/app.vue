@@ -55,7 +55,6 @@
       <v-toolbar-title style="cursor:pointer"><router-link to="/">Landmark Challenge</router-link></v-toolbar-title>
        <v-spacer></v-spacer>
        <v-toolbar-items class="hidden-sm-and-down">
-
          <v-btn
           class="white--text"
           v-if="isLoggedIn"
@@ -65,7 +64,6 @@
           Upload picture
           <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
-
           <v-menu offset-y>
             <v-btn  flat slot="activator"  dark>
               {{ current.title }}
