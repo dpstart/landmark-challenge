@@ -2,74 +2,116 @@
   <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md6>
+          <v-flex xs12 sm12 md6 offset-md1>
             <div class="google-map" :id="mapName"></div>
+          </v-flex>
+          <v-flex xs12 sm12 md4 offset-md1>
+
+            <v-container
+              fluid
+              style="min-height: 0;"
+              grid-list-lg
+            >
+              <v-layout row wrap v-for="(elem, index) in monumentData">
+                <v-flex xs12>
+                  <v-card color="blue-grey" class="white--text">
+                    <v-card-title primary-title>
+                      <div class="headline">{{elem.name}}</div>
+                      <div>{{elem.desc}}</div>
+                    </v-card-title>
+                    <v-card-actions>
+                      <v-btn flat dark @click="pan(index)">See on map</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-container>
           </v-flex>
         </v-layout>
       </v-container>
   </v-content>
 </template>
 <script>
+
+function getContentString (name, desc) {
+
+    var content = '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
+                  '<br>'+
+                  '<div id="bodyContent">'+
+                  desc
+                  '</div>';
+
+    return content;
+  }
+
 export default {
   name: 'google-map',
   props: ['name'],
   data: function () {
     return {
       mapName: this.name + "-map",
-      markerCoordinates: [{
-        latitude: 41.8902,
-        longitude: 12.4922
-      },
-      {
-        latitude: 41.879040, 
-        longitude: 12.492439
-      }],
       map: null,
       bounds: null,
-      markers: []
+      markers: [],
+
+      monumentData: [
+        { name: "Colosseo", 
+          desc: "The Colosseum or Coliseum also known as the Flavian Amphitheatre is an oval amphitheatre in the centre of the city of Rome, Italy.",
+          latitude: 41.8902,
+          longitude: 12.4922 },
+        { name: "Baths of Caracalla", 
+          desc: "The Baths of Caracalla (Italian: Terme di Caracalla) in Rome, Italy, were the city's second largest Roman public baths, or thermae, likely built between AD 212 (or 211) and 216/217, during the reigns of emperors Septimius Severus and Caracalla.",
+          latitude: 41.879040,
+          longitude: 12.492439}
+      ]
+    }
+  },
+  methods: {
+    pan (index) {
+      var center = new google.maps.LatLng(this.monumentData[index].latitude, this.monumentData[index].longitude);
+    // using global variable:
+      this.map.panTo(center);
+      this.map.setZoom(17);
+
+      for(var i = 0 ; i< this.markers.length; i++){
+        var infowindow = new google.maps.InfoWindow({
+            content: getContentString(this.monumentData[index].name, this.monumentData[index].desc)
+           });
+        
+        console.log(this.markers[i].getPosition().lat());
+        if(this.markers[i].getTitle() == this.monumentData[index].name){
+          infowindow.open(this.map, this.markers[i]);
+          break;
+        }
+      }
     }
   },
   mounted: function () {
-    var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-    var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
+    
     this.bounds = new google.maps.LatLngBounds();
     const element = document.getElementById(this.mapName)
-    const mapCentre = this.markerCoordinates[0]
+    const mapCentre = {latitude:this.monumentData[0].latitude, longitude: this.monumentData[0].longitude}
     const options = {
       center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
     }
     this.map = new google.maps.Map(element, options);
-    this.markerCoordinates.forEach((coord) => {
-      const position = new google.maps.LatLng(coord.latitude, coord.longitude);
+    this.monumentData.forEach((data) => {
+      const position = new google.maps.LatLng(data.latitude, data.longitude);
       const marker = new google.maps.Marker({ 
         position,
         map: this.map
       });
+      marker.setTitle(data.name);
       this.markers.push(marker)
       this.map.fitBounds(this.bounds.extend(position))
       marker.addListener('click', function() {
+
+           var infowindow = new google.maps.InfoWindow({
+            content: getContentString(data.name, data.desc)
+           });
           infowindow.open(this.map, marker);
         });
     });
