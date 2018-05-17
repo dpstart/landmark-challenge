@@ -21,6 +21,8 @@ import Login from '../components/login.vue'
 import Register from '../components/register.vue'
 import Drop from '../components/drop.vue'
 
+import axios from 'axios';
+
 Vue.use(Router)
 
 
@@ -64,12 +66,22 @@ const store = new Vuex.Store({
   actions: {
     login({ commit }, creds) {
       commit(LOGIN); // show spinner
-      return new Promise(resolve => {
-        setTimeout(() => {
-          localStorage.setItem("token", "JWT");
+
+      return new Promise((resolve,reject) => {
+        axios.post('http://localhost:3000/auth/sign_in',{
+          email: creds.email,
+          password: creds.password,
+        })
+        .then(function (response) {
+          let token = response.headers['access-token'];
+          localStorage.setItem("token", token);
           commit(LOGIN_SUCCESS);
           resolve();
-        }, 1000);
+        })
+        .catch(function (error) {
+          //console.log(error);
+          reject(error);
+        });
       });
     },
     logout({ commit }) {
