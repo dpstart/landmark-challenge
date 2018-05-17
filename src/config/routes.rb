@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   #resources :users
-
+  resources :landmarks
+  resources :citys
   root to: 'landing#index'
 end

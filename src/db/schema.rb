@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_16_172909) do
+ActiveRecord::Schema.define(version: 2018_05_17_220618) do
+
+  create_table "achievements", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "has_earneds", force: :cascade do |t|
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "profile_id"
+    t.integer "achievement"
+  end
+
+  create_table "has_visiteds", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "profile_id"
+    t.integer "landmark_id"
+  end
 
   create_table "landmarks", force: :cascade do |t|
     t.string "description"
@@ -19,6 +49,17 @@ ActiveRecord::Schema.define(version: 2018_05_16_172909) do
     t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "city_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "bio"
+    t.integer "reputation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

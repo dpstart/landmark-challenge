@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+        has_one :profile, inverse_of: :user
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
