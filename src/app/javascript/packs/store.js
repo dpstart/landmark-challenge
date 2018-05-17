@@ -8,6 +8,11 @@ const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
 
+const SIGNUP = "SIGNUP"
+const SIGNUP_SUCCESS = "SIGNUP_SUCCESS"
+
+const BASE_URL = "http://localhost:3000/"
+
 export default new Vuex.Store({
   state: {
     isLoggedIn: !!localStorage.getItem("token")
@@ -25,11 +30,30 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    signup({ commit }, creds) {
+
+      console.log(creds)
+      return new Promise((resolve,reject) => {
+        axios.post( BASE_URL + 'auth',{
+          email: creds.email,
+          password: creds.password,
+          password_confirmation: creds.password_confirm
+        })
+        .then(function (response) {
+          console.log(response)
+          resolve();
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject(error);
+        });
+      });
+    },
     login({ commit }, creds) {
       commit(LOGIN); // show spinner
 
       return new Promise((resolve,reject) => {
-        axios.post('http://localhost:3000/auth/sign_in',{
+        axios.post( BASE_URL + 'auth/sign_in',{
           email: creds.email,
           password: creds.password,
         })

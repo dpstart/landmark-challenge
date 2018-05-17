@@ -22,9 +22,6 @@ import Drop from '../components/drop.vue'
 
 import store from './store.js'
 
-Vue.use(Router)
-
-
 const router =  new Router({
   routes:  [
     { path: '/', name: "Home", component: Home },
@@ -36,14 +33,13 @@ const router =  new Router({
 })
 
 Vue.component('google-map', Map)
-
+Vue.use(Router)
 Vue.use(Vuetify)
-//Vue.use(Vuex)
+
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('app'))
 
-  
   const app = new Vue({
     el: 'app',
     router,
