@@ -108,9 +108,9 @@ export default {
         position,
         map: this.map,
         icon: {
-          size: new google.maps.Size(50, 50),
-          scaledSize: new google.maps.Size(50, 50),
-          url: "https://png.icons8.com/color/1600/map-pin.png"
+          size: new google.maps.Size(55, 55),
+          scaledSize: new google.maps.Size(55, 55),
+          url: "https://d30y9cdsu7xlg0.cloudfront.net/png/7224-200.png"
         }
       });
       marker.setTitle(data.name);

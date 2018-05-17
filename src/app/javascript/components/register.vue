@@ -1,6 +1,11 @@
 <template>
   <v-app id="inspire">
     <v-content>
+      <div>
+        <v-alert v-model="errors" :key="index" v-for="(error, index) in errors" type="error" dismissible>
+          {{error}}
+        </v-alert>
+      </div>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -77,6 +82,7 @@
       mode: '',
       timeout: 6000,
       
+      errors: [],
 
       email: "",
       password: "",
@@ -109,8 +115,9 @@
                     this.success = true
                     this.$refs.form.reset()
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch((errors) => {
+                    console.log(errors)
+                    this.errors = errors
                     this.error = true
                 });
             }

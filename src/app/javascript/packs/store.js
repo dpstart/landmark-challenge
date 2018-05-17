@@ -32,7 +32,6 @@ export default new Vuex.Store({
   actions: {
     signup({ commit }, creds) {
 
-      console.log(creds)
       return new Promise((resolve,reject) => {
         axios.post( BASE_URL + 'auth',{
           email: creds.email,
@@ -43,9 +42,9 @@ export default new Vuex.Store({
           console.log(response)
           resolve();
         })
-        .catch(function (error) {
-          console.log(error);
-          reject(error);
+        .catch( (error) => {
+          let errors = error.response.data.errors.full_messages;
+          reject(errors);
         });
       });
     },
