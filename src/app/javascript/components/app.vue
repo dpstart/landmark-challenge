@@ -7,7 +7,20 @@
       fixed
       app
     >
+      <v-toolbar flat class="transparent" v-if="isLoggedIn">
+        <v-list class="pa-0">
+          <v-list-tile :to="{name: 'Profile'}" @click.stop="drawer = !drawer" avatar>
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg" >
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>John Doe</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
       <v-list dense>
+        <v-divider></v-divider>
         <v-list-tile :to="{name: 'Home'}" @click.stop="drawer = !drawer">
           <v-list-tile-action>
             <v-icon>home</v-icon>
@@ -32,6 +45,14 @@
             <v-list-tile-title >Sign up</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile :to="{name: 'Drop'}" @click.stop="drawer = !drawer" v-if="isLoggedIn">
+          <v-list-tile-action>
+            <v-icon>cloud_upload</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content @click.stop="drawer = !drawer">
+            <v-list-tile-title>Upload picture</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile :to="{name: 'Profile'}" @click.stop="drawer = !drawer" v-if="isLoggedIn">
           <v-list-tile-action>
             <v-icon>account_circle</v-icon>
@@ -42,7 +63,7 @@
         </v-list-tile>
         <v-list-tile @click="logout" v-if="isLoggedIn">
           <v-list-tile-action>
-            <v-icon>account_circle</v-icon>
+            <v-icon>input</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Logout</v-list-tile-title>
@@ -54,16 +75,16 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title style="cursor:pointer"><router-link to="/">Landmark Challenge</router-link></v-toolbar-title>
        <v-spacer></v-spacer>
-       <v-toolbar-items class="hidden-sm-and-down">
-         <v-btn
-          class="white--text"
+        <v-btn
+          class="white--text hidden-sm-and-down"
           v-if="isLoggedIn"
-          color="primary"
+          color="green"
           :to="{name: 'Drop'}"
         >
           Upload picture
           <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
+       <v-toolbar-items class="hidden-sm-and-down">
           <v-menu offset-y>
             <v-btn  flat slot="activator"  dark>
               {{ current.title }}
@@ -139,10 +160,6 @@
   .footer-body {
     margin-left: 10px;
   }
-
-  /*.dropdown-icon {
-    margin-right:7px;
-  }*/
 
 </style>
 

@@ -10,9 +10,36 @@
               </v-toolbar>
               <v-card-text>
                 <v-form ref="form" lazy-validation>
-                  <v-text-field  v-model="email" prepend-icon="person" name="email" label="Email" type="text"></v-text-field>
-                  <v-text-field  v-model="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
-                  <v-text-field  v-model="password_confirm" prepend-icon="lock" name="password_confirm" label="Confirm Password" type="password"></v-text-field>
+                  <v-text-field  
+                    :rules="emailRules" 
+                    required
+                    v-model="email" 
+                    prepend-icon="person" 
+                    name="email" 
+                    label="Email" 
+                    type="text"
+                    >
+                  </v-text-field>
+                  <v-text-field  
+                    :rules="passwordRules" 
+                    required
+                    v-model="password" 
+                    prepend-icon="lock" 
+                    name="password" 
+                    label="Password" 
+                    type="password"
+                  >
+                  </v-text-field>
+                  <v-text-field  
+                    :rules="passwordRules" 
+                    required
+                    v-model="password_confirm" 
+                    prepend-icon="lock" 
+                    name="password_confirm" 
+                    label="Confirm Password" 
+                    type="password"
+                  >
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -32,7 +59,7 @@
               v-model="success"
             >
               We've sent you a confirmation email.
-             <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+             <v-btn flat color="pink" @click.native="snackbar = false; success=false;">Close</v-btn>
             </v-snackbar>
           </v-flex>
         </v-layout>
@@ -54,6 +81,14 @@
       email: "",
       password: "",
       password_confirm : "",
+
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
+      passwordRules: [
+          v => !!v || 'Password is required',
+      ],
 
       success: false
     }),
@@ -92,6 +127,3 @@
   }
 </script>
 
-<style scoped>
-
-</style>
