@@ -50,7 +50,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="primary" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title style="cursor:pointer"><router-link to="/">Landmark Challenge</router-link></v-toolbar-title>
        <v-spacer></v-spacer>
@@ -92,7 +92,7 @@
 
       <router-view></router-view>
 
-    <v-footer color="indigo" app>
+    <v-footer color="primary" app>
       <span class="white--text footer-body">&copy; 2018</span>
     </v-footer>
   </v-app>

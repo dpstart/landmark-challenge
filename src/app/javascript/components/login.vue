@@ -3,7 +3,7 @@
     <v-content>
       <div>
         <v-alert v-model="error" type="error" dismissible>
-          This is a success alert that is closable.
+          Log in error.
         </v-alert>
       </div>
       <v-container fluid fill-height>
@@ -103,5 +103,9 @@
     a {
         margin-left:10px;
         text-decoration:none;
+    }
+
+    .alert {
+      margin-top: 0 !important;
     }
 </style>
