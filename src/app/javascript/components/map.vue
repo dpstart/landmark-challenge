@@ -12,7 +12,7 @@
               style="min-height: 0;"
               grid-list-lg
             >
-              <v-layout row wrap v-for="(elem, index) in monumentData">
+              <v-layout row wrap :key="index" v-for="(elem, index) in monumentData">
                 <v-flex xs12>
                   <v-card color="blue-grey" class="white--text">
                     <v-card-title primary-title>
@@ -22,7 +22,7 @@
                     <v-card-actions>
                       <v-btn flat dark @click="pan(index)">See on map</v-btn>
                     </v-card-actions>
-                  </v-card>
+                  </v-card> 
                 </v-flex>
               </v-layout>
             </v-container>
