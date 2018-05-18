@@ -1,6 +1,11 @@
 <template>
   <v-app id="inspire">
     <v-content>
+      <div>
+        <v-alert v-model="error" type="error" dismissible>
+          Log in error.
+        </v-alert>
+      </div>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -48,6 +53,8 @@
 <script>
   export default {
     data: () => ({
+      error: false,
+      alert: true,
       drawer: null,
       email: "",
       emailRules: [
@@ -71,6 +78,11 @@
                     password: this.password
                 }).then(() => {
                     this.$router.push("/")
+                })
+                .catch((error) => {
+                    console.log("Errore")
+                    console.log(error)
+                    this.error = true
                 });
             }
         }
@@ -91,5 +103,9 @@
     a {
         margin-left:10px;
         text-decoration:none;
+    }
+
+    .alert {
+      margin-top: 0 !important;
     }
 </style>
