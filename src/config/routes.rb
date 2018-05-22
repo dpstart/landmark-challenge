@@ -14,5 +14,8 @@ Rails.application.routes.draw do
   #resources :users
   resources :landmarks
   resources :citys
+  resources :users
+  resources :profiles
+  
   root to: 'landing#index'
 end
