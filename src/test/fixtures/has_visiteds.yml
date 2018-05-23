@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
+  when: 2018-05-17
 
 two:
-  name: MyString
-  description: MyString
+  when: 2018-05-17
