@@ -14,6 +14,14 @@ class RegistrationsController < Devise::RegistrationsController
 		log_info("RegistrationsController > `create` action invoked")
 
 		user = User.new(user_params)
+		user.profile = Profile.new(profile_params)
+
+		if user.profile.save
+			log_info('RegistrationsController >>> Successfully created user\'s profile with id=' + user.profile.id.to_s)
+		else
+			log_error('RegistrationsController >>> Error creating user\'s profile')
+		end
+
     	if user.save
       		render :json => {:auth_token => user.id}
       		return
@@ -26,7 +34,11 @@ class RegistrationsController < Devise::RegistrationsController
 	private
 
 		def user_params
-			params.require(:user).permit(:email, :password, :password_confirmation)
+			param = params.permit(:email, :password, :password_confirmation, :first_name, :last_name).except(:first_name, :last_name)
+		end
+
+		def profile_params
+			params.permit(:first_name, :last_name).except(:email, :password, :password_confirmation)
 		end
 
 		def log_error(errmsg)
