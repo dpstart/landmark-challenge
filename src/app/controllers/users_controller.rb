@@ -2,7 +2,7 @@ require 'colorize'
 
 class UsersController < ApplicationController
 
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:create]
 
 	def index
 		log_info('UsersController >>> \'index\' action invoked')
@@ -23,11 +23,18 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
+		@user.profile = Profile.new(profile_params)
 
 		if @user.save
 			log_info('UsersController >>> Successfully created new user with id=' + @user.id.to_s)
 		else
 			log_error('UsersController >>> Error creating new user')
+		end
+
+		if @user.profile.save
+			log_info('UsersController >>> Successfully created user\'s profile with id=' + @user.profile.id.to_s)
+		else
+			log_error('UsersController >>> Error creating user\'s profile')
 		end
 	end
 
@@ -49,7 +56,11 @@ class UsersController < ApplicationController
 	private
 
 		def user_params
-			params.require(:user).permit(:email, :password)	
+			params.require(:user).permit(:email, :password, :password_confirmation)	
+		end
+
+		def profile_params
+			params.require(:profile).permit(:first_name, :last_name)
 		end
 
 		def log_error(errmsg)
