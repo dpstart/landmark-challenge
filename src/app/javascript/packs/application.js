@@ -12,6 +12,8 @@ import Vue from 'vue/dist/vue.esm.js'
 import Router from 'vue-router'
 import Vuetify from 'vuetify'
 import App from '../components/app.vue'
+import BootstrapVue from 'bootstrap-vue'
+
 
 import Map from '../components/map.vue'
 import Home from '../components/home.vue'
@@ -47,6 +49,7 @@ router.beforeEach((to, from, next) => {
 })
 
 Vue.component('google-map', Map)
+Vue.use(BootstrapVue);
 Vue.use(Router)
 Vue.use(Vuetify)
 
