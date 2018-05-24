@@ -15,7 +15,8 @@ const BASE_URL = "http://localhost:3000/"
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: !!localStorage.getItem("token")
+    isLoggedIn: !!localStorage.getItem("token"),
+    pending: false
   },
   mutations: {
     [LOGIN] (state) {
@@ -76,6 +77,9 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => {
       return state.isLoggedIn
+     },
+     isPending: state => {
+      return state.pending
      }
   }
 });  

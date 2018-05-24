@@ -83,7 +83,7 @@
       timeout: 6000,
       
       errors: [],
-
+     
       email: "",
       password: "",
       password_confirm : "",
