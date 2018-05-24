@@ -29,7 +29,7 @@ class CustomOmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
       logger.info '[INFO]'.blue + ' ' + @auth_params.to_s
 
       # render :json => @auth_params
-      redirect_to 'http://localhost:3000/#/auth_token/?' + 
+      redirect_to 'http://localhost:3000/#/auth_token?' + 
                                                          + 'token=' + @auth_params[:auth_token] +
                                                          + '&uid=' + @auth_params[:uid] +
                                                          + '&client_id=' + @auth_params[:client_id]

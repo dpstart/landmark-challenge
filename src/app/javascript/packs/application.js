@@ -22,6 +22,9 @@ import Drop from '../components/drop.vue'
 
 import store from './store.js'
 
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN = "LOGIN";
+
 const router =  new Router({
   routes:  [
     { path: '/', name: "Home", component: Home },
@@ -30,6 +33,17 @@ const router =  new Router({
     { path: '/register', name: "Register",  component: Register},
     { path: '/drop', name: "Drop",  component: Drop}
   ]
+})
+
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/auth_token') {
+    store.commit(LOGIN);
+    localStorage.setItem('token', to.query.token);
+    store.commit(LOGIN_SUCCESS);
+    console.log("Redirecting...");
+    next('/');
+  } else next();
 })
 
 Vue.component('google-map', Map)
