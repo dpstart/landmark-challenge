@@ -11,6 +11,9 @@ install:
 
 run:
 	foreman start
+	
+run_windows:
+	rails s -b 10.0.2.15 & foreman start frontend
 
 test:
 	rake cucumber
