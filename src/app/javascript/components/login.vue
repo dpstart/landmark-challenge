@@ -40,7 +40,10 @@
                 <a  color="primary" style="margin-left:10px">FORGOT PASSWORD</a>
                 <a  color="primary"><router-link  to="/register">REGISTER</router-link></a>
                 <v-spacer></v-spacer>
+                <v-progress-circular v-if="isPending" indeterminate color="primary"></v-progress-circular>
                 <v-btn @click="login({ email, password })" color="primary">Login</v-btn>
+                <a href="/auth/google_oauth2"><v-btn color="primary">Google</v-btn></a>
+                <a href="/auth/github"><v-btn color="primary">Github</v-btn></a>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -56,6 +59,7 @@
       error: false,
       alert: true,
       drawer: null,
+
       email: "",
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -86,6 +90,13 @@
                 });
             }
         }
+    },
+
+    computed: {
+
+      isPending () {
+        return this.$store.getters.isPending;
+      }
     },
     beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.

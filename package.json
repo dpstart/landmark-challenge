@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
     "mapbox-gl-vue": "^1.8.2",
     "vue-googlemaps": "^0.0.6",
     "vue-router": "^3.0.1",
