@@ -17,10 +17,31 @@ Given("I'm a logged-in admin") do
   
 end
 
-When("I request to create a new landmark") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("There is at least one city") do
+  query ={
+    :city => {
+      :name => "Rome",
+      :country => "Italy"
+    }
+  }
+  url = 'http://localhost:3000/citys'
+  @res_city = HTTParty.post(url, :query => query) #on success it returns city attribute
 end
 
-Then("I should be replied with a message indicating the operation was successful") do
-  pending # Write code here that turns the phrase above into concrete actions
+When("I request to create a new landmark") do
+  query ={
+    :landmark => {
+      :name => "Colosseum",
+      :description => "The most important monument in Rome",
+      :latitude => 41.890251,
+      :longitude => 12.492373,
+      :city_id => @res_city.parsed_response["id"]
+    }
+  }
+  url = 'http://localhost:3000/landmarks'
+  @res_landmark = HTTParty.post(url, :query => query)  
+end
+
+Then("I should be replied with 'landmark_created'") do
+  @res_landmark
 end
