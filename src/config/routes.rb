@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
   #resources :users
   resources :landmarks
+
+  get '/citys/find_id_by_name', to: 'citys#find_id_by_name'  
   resources :citys
+
   resources :users
   resources :profiles
   
