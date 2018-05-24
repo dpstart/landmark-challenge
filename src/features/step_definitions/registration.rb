@@ -1,12 +1,12 @@
 require 'httparty'
 
-$email = "foobar@example.com"
-$password = "12345678"
+$user_email = "foobar@example.com"
+$user_password = "12345678"
 
 Given("I'm not a registered user") do
 
   query = {
-  	:email => $email
+  	:email => $user_email
   }
 
   url = 'http://localhost:3000/auth/exists'
@@ -18,9 +18,9 @@ end
 When("I make a request to signup to the website") do
 
   query = {
-  	"email" => $email,
-  	"password" => $password,
-  	"password_confirmation"	=> $password
+  	"email" => $user_email,
+  	"password" => $user_password,
+  	"password_confirmation"	=> $user_password
   }
 
   url = 'http://localhost:3000/auth'
