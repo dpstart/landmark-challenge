@@ -10,9 +10,9 @@ class CitysController < ApplicationController
     def create
         @city = City.new(city_params)
         if @city.save
-            render :json => @city
+            render :json => { :status => 'city_created', :city => @city }, status: 200
         else
-            render :json => 'error'
+            render :json =>  { :status => 'error', :message => 'City not created' }, status: 400
         end
     end
 

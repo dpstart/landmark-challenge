@@ -43,5 +43,5 @@ When("I request to create a new landmark") do
 end
 
 Then("I should be replied with 'landmark_created'") do
-  @res_landmark
+  @res_landmark.parsed_response["status"]
 end
