@@ -12,7 +12,7 @@ class LandmarksController < ApplicationController
         if @landmark.save
             render :json => { :status => 'landmark_created', :city => @city }, status: 200
         else
-            render :json =>  { :status => 'error', :message => 'Landmark not created' }, status: 400
+            render :json =>  { :status => 'error', :message => @landmark.errors.details }, status: 400
         end
     end
 
