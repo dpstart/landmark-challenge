@@ -14,7 +14,7 @@
                 <v-toolbar-title>Sign up</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form ref="form" lazy-validation>
+                <v-form ref="form">
                   <v-text-field  
                     :rules="emailRules" 
                     required

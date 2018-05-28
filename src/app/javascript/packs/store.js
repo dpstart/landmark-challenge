@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_ERROR = "LOGIN_ERROR";
 const LOGOUT = "LOGOUT";
 
 const SIGNUP = "SIGNUP"
@@ -26,8 +27,11 @@ export default new Vuex.Store({
       state.isLoggedIn = true;
       state.pending = false;
     },
-    [LOGOUT](state) {
+    [LOGOUT] (state) {
       state.isLoggedIn = false;
+    },
+    [LOGIN_ERROR] (state) {
+      state.pending = false;
     }
   },
   actions: {
@@ -64,7 +68,7 @@ export default new Vuex.Store({
           resolve();
         })
         .catch(function (error) {
-          //console.log(error);
+          commit(LOGIN_ERROR);
           reject(error);
         });
       });

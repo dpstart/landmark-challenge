@@ -20,7 +20,7 @@
                       <div>{{elem.desc}}</div>
                     </v-card-title>
                     <v-card-actions>
-                      <v-btn flat dark @click="pan(index)">See on map</v-btn>
+                      <v-btn @click="pan(index)">See on map</v-btn>
                     </v-card-actions>
                   </v-card> 
                 </v-flex>
