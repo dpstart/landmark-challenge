@@ -10,7 +10,7 @@ class LandmarksController < ApplicationController
     def create
         @landmark = Landmark.new(landmark_params)
         if @landmark.save
-            render :json => { :status => 'landmark_created', :city => @landmark.city_id }, status: 200
+            render :json => { :status => 'landmark_created', :landmark_id => @landmark.id, :city_id => @landmark.city_id }, status: 200
         else
             render :json =>  { :status => 'error', :message => @landmark.errors.details }, status: 400
         end
