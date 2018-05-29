@@ -1,6 +1,6 @@
 class LandmarksController < ApplicationController
 
-    before_action :authenticate_admin!, only: [:create]
+    before_action :authenticate_admin!, only: [:create, :destroy]
 
     def index
         @landmarks = Landmark.all
@@ -13,6 +13,15 @@ class LandmarksController < ApplicationController
             render :json => 'landmark_created'
         else
             render :json => 'error'
+        end
+    end
+
+    def destroy
+        # Only admins should be able to delete Landmarks
+        if Landmark.find_by(:name => params[:name]).destroy
+            render :json => { :status => "success", message => "Landmark destroyed" }, status: 201
+        else
+            render :json => { :status => "error", message => "Cannot destroy landmark. Are you sure it exists and you're an admin? ;)" }, status: 401
         end
     end
 
