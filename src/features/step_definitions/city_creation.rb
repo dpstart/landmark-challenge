@@ -25,21 +25,19 @@ When("I request to create new City") do
     
     query ={
         :city => {
-          :name => "Rome",
+          :name => "Milan",
           :country => "Italy"
         }
       }
       url = 'http://localhost:3000/citys'
-      @res_city = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
+      $res = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
                                                                     "token-type" => @token_type,
                                                                     "client" => @client,
                                                                     "expiry" => @expiry,
                                                                     "uid" => @uid
                                                                     })
+                                                                    p $res
   end
   
-Then("I shoul be replied with {string}") do |string|
-    @res_city.parsed_response["status"]
-end
-  
+
   

@@ -35,7 +35,7 @@ Given("There is at least one city") do
                                                               "expiry" => @expiry,
                                                               "uid" => @uid
                                                               }) #on success it returns city attribute
-  p @res_city
+  $city_id = @res_city.parsed_response["city"]["id"]
 end
 
 When("I request to create a new landmark") do
@@ -45,11 +45,11 @@ When("I request to create a new landmark") do
       :description => "The most important monument in Rome",
       :latitude => 41.890251,
       :longitude => 12.492373,
-      :city_id => @res_city.parsed_response["city"]["id"]
+      :city_id => $city_id
     }
   }
   url = 'http://localhost:3000/landmarks'
-  @res_landmark = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
+  $res = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
                                                                   "token-type" => @token_type,
                                                                   "client" => @client,
                                                                   "expiry" => @expiry,
@@ -57,6 +57,7 @@ When("I request to create a new landmark") do
                                                                   })  
 end
 
-Then("I should be replied with 'landmark_created'") do
-  @res_landmark.parsed_response["status"]
+Then("I should be replied with {string}") do |string|
+  response = $res.parsed_response["status"] 
+  response == string
 end
