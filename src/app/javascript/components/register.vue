@@ -14,7 +14,7 @@
                 <v-toolbar-title>Sign up</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form ref="form" lazy-validation>
+                <v-form ref="form">
                   <v-text-field  
                     :rules="emailRules" 
                     required
@@ -51,6 +51,8 @@
                 <a color="primary" style="margin-left:10px"><router-link to="/login">LOGIN</router-link></a>
                 <v-spacer></v-spacer>
                 <v-btn color="primary"  @click="signup({ email, password, password_confirm })">Sign up</v-btn>
+                <a href="/auth/google_oauth2"><v-btn color="primary">Google</v-btn></a>
+                <a href="/auth/github"><v-btn color="primary">Github</v-btn></a>
               </v-card-actions>
             </v-card>
             <v-snackbar
@@ -74,6 +76,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     data: () => ({
       drawer: null,
@@ -111,7 +115,6 @@
                     password: this.password,
                     password_confirmation: this.password_confirm
                 }).then(() => {
-                    console.log("Successful signup")
                     this.success = true
                     this.$refs.form.reset()
                 })
@@ -121,11 +124,11 @@
                     this.error = true
                 });
             }
-        }
+        },
+
     },
   
     beforeRouteEnter (to, from, next) {
-
         if(!!localStorage.getItem("token")){
             next(false)
         }

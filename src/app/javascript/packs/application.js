@@ -12,6 +12,8 @@ import Vue from 'vue/dist/vue.esm.js'
 import Router from 'vue-router'
 import Vuetify from 'vuetify'
 import App from '../components/app.vue'
+import BootstrapVue from 'bootstrap-vue'
+
 
 import Map from '../components/map.vue'
 import Home from '../components/home.vue'
@@ -21,6 +23,9 @@ import Register from '../components/register.vue'
 import Drop from '../components/drop.vue'
 
 import store from './store.js'
+
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN = "LOGIN";
 
 const router =  new Router({
   routes:  [
@@ -32,7 +37,19 @@ const router =  new Router({
   ]
 })
 
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/auth_token') {
+    store.commit(LOGIN);
+    localStorage.setItem('token', to.query.token);
+    store.commit(LOGIN_SUCCESS);
+    console.log("Redirecting...");
+    next('/');
+  } else next();
+})
+
 Vue.component('google-map', Map)
+Vue.use(BootstrapVue);
 Vue.use(Router)
 Vue.use(Vuetify)
 

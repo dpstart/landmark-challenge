@@ -23,6 +23,9 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-github'
 
+# Make HTTP requests
+gem 'httparty'
+
 # Mailer
 gem 'mailcatcher'
 
@@ -73,6 +76,8 @@ group :test do
   gem 'factory_bot_rails'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  # rack-test is used for testing APIs
+  gem 'rack-test'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

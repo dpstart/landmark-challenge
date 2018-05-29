@@ -42,6 +42,8 @@
                 <v-spacer></v-spacer>
                 <v-progress-circular v-if="isPending" indeterminate color="primary"></v-progress-circular>
                 <v-btn @click="login({ email, password })" color="primary">Login</v-btn>
+                <a href="/auth/google_oauth2"><v-btn color="primary">Google</v-btn></a>
+                <a href="/auth/github"><v-btn color="primary">Github</v-btn></a>
               </v-card-actions>
             </v-card>
           </v-flex>

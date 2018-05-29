@@ -1,4 +1,5 @@
 class City < ApplicationRecord
     has_many :landmarks
-    validates :name, presence: true
+    validates :name, :country, presence: true
+
 end
