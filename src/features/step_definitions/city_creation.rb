@@ -36,7 +36,20 @@ When("I request to create new City") do
                                                                     "expiry" => @expiry,
                                                                     "uid" => @uid
                                                                     })
-                                                                    p $res
+                                                                    
+      city_id = $res.parsed_response['city']['id']
+      
+      query = {
+        :name => "Milan"
+      }
+      url = 'http://localhost:3000/citys/' + city_id.to_s
+      res = HTTParty.delete(url, :query => query, :headers => {"access-token" => @admin_token,
+                                                                    "token-type" => @token_type,
+                                                                    "client" => @client,
+                                                                    "expiry" => @expiry,
+                                                                    "uid" => @uid
+                                                                    })
+      
   end
   
 

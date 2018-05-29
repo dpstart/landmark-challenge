@@ -22,7 +22,7 @@ Given("I'm a logged-in admin") do
 end
 
 Given("There is at least one city") do
-  query ={
+  query = {
     :city => {
       :name => "Rome",
       :country => "Italy"
@@ -49,12 +49,37 @@ When("I request to create a new landmark") do
     }
   }
   url = 'http://localhost:3000/landmarks'
-  $res = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
+  landmark_res = HTTParty.post(url, :query => query, :headers => {"access-token" => @admin_token,
                                                                   "token-type" => @token_type,
                                                                   "client" => @client,
                                                                   "expiry" => @expiry,
                                                                   "uid" => @uid
                                                                   })  
+  p landmark_res.parsed_response
+  city_id = landmark_res.parsed_response['city_id']
+  landmark_id = landmark_res.parsed_response['landmark_id']
+
+  query = {
+    :name => "Rome"
+  }
+  url = 'http://localhost:3000/citys/' + city_id.to_s
+  res = HTTParty.delete(url, :query => query, :headers => { "access-token" => @admin_token,
+                                                            "token-type" => @token_type,
+                                                            "client" => @client,
+                                                            "expiry" => @expiry,
+                                                            "uid" => @uid
+                                                          })
+
+  query = {
+    :name => "Colosseum"
+  }
+  url = 'http://localhost:3000/landmarks/' + landmark_id.to_s
+  res = HTTParty.delete(url, :query => query, :headers => { "access-token" => @admin_token,
+                                                            "token-type" => @token_type,
+                                                            "client" => @client,
+                                                            "expiry" => @expiry,
+                                                            "uid" => @uid
+                                                          })
 end
 
 Then("I should be replied with {string}") do |string|
