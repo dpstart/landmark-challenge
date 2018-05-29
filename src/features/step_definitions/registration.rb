@@ -24,11 +24,7 @@ When("I make a request to signup to the website") do
   }
 
   url = 'http://localhost:3000/auth'
-  $response = HTTParty.post(url, :query => query)
+  $res = HTTParty.post(url, :query => query)
 
-end
-
-Then("I should be replied with 'success'") do
-  $response.parsed_response['success']
 end
 
