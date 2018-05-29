@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     # Define routes for Admin within this block.
   end
 
-  #devise_for :users, :controllers => {:registrations => "registrations"}
+  # Fuck session-based authentication
+  # devise_for :users, :controllers => {:registrations => "registrations"}
 
   get 'landing/index'
   get 'welcome/index'
