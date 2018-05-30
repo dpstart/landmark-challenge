@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
 
+    before_action :authenticate_user!, only: [:index]
+
     # Only admins should be able to use this action
     def all
 
