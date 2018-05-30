@@ -2,16 +2,23 @@ class LandmarksController < ApplicationController
 
     before_action :authenticate_admin!, only: [:create, :destroy]
 
+    # If 'name' param is set, a query is made to filter landmarks located in that city
+    # Else all landmarks are rendered
     def index
-        @landmarks = Landmark.all
-        render :json => @landmarks
-    end
-
-    def filter
-        @landmarks = Landmark.all.to_a
-        @city_name = params['city']
-        @city_id = City.find_by(:name => @city_name).id
-        render :json => @landmarks.where(:city_id == @city_id)
+        if params[:city]
+            @landmarks = Landmark.all
+            @city_name = params['city']
+            @city = City.find_by(:name => @city_name)
+            if @city 
+                @city_id = @city.id
+                render :json => @landmarks.where(:city_id => @city_id), status: 200
+            else
+                render :json => { :status => 'error', :message => 'No such city in the database' }, status: 401
+            end
+        else
+            @landmarks = Landmark.all
+            render :json => @landmarks
+        end
     end
 
     def create
