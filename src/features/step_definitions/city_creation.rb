@@ -36,7 +36,7 @@ When("I request to create new City") do
                                                                     "expiry" => @expiry,
                                                                     "uid" => @uid
                                                                     })
-                                                                    
+                                                              
       city_id = $res.parsed_response['city']['id']
       
       query = {

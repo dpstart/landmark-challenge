@@ -55,7 +55,6 @@ When("I request to create a new landmark") do
                                                                   "expiry" => @expiry,
                                                                   "uid" => @uid
                                                                   })  
-  p landmark_res.parsed_response
   city_id = landmark_res.parsed_response['city_id']
   landmark_id = landmark_res.parsed_response['landmark_id']
 
