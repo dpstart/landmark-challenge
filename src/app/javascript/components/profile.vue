@@ -13,8 +13,8 @@
               </v-card-title>
               <v-card-text class="cardtext">
                 <div>
-                  <h3  class="headline mb-0">John Doe</h3>
-                  <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                  <h3  class="headline mb-0">{{first_name}} {{last_name}}</h3>
+                  <div>{{bio}}</div>
                 </div>
               </v-card-text>
           <v-card-actions>
@@ -33,7 +33,11 @@ export default {
   name: 'hello',
   data: function () {
     return {
- 
+      
+      
+      first_name: '',
+      last_name: '',
+      bio: ''
     } 
   },
   beforeRouteEnter (to, from, next) {
@@ -44,7 +48,18 @@ export default {
           next(false)
       }
       else next()
-  },  
+  },
+  created() {
+  
+    this.$store.dispatch("profile")
+      .then( (response) => {
+        console.log(response);
+        this.first_name = response.first_name;
+        this.last_name = response.last_name;
+        this.bio = response.bio;
+      })
+      
+  }  
 }
 
 </script>
