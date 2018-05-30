@@ -7,6 +7,13 @@ class LandmarksController < ApplicationController
         render :json => @landmarks
     end
 
+    def filter
+        @landmarks = Landmark.all.to_a
+        @city_name = params['city']
+        @city_id = City.find_by(:name => @city_name).id
+        render :json => @landmarks.where(:city_id == @city_id)
+    end
+
     def create
         @landmark = Landmark.new(landmark_params)
         if @landmark.save

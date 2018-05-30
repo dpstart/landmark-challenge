@@ -14,6 +14,17 @@ const SIGNUP_SUCCESS = "SIGNUP_SUCCESS"
 
 const BASE_URL = "http://localhost:3000/"
 
+function setHeaders(response){
+  let token = response.headers['access-token'];
+  let uid = response.headers['uid'];
+  let client = response.headers['client'];
+  let expiry = response.headers['expiry'];
+  localStorage.setItem("token", token);
+  localStorage.setItem("uid", uid);
+  localStorage.setItem("client", client);
+  localStorage.setItem("expiry", expiry);
+}
+
 export default new Vuex.Store({
   state: {
     isLoggedIn: !!localStorage.getItem("token"),
@@ -35,13 +46,37 @@ export default new Vuex.Store({
     }
   },
   actions: {
+
+    profile( {commit} ) {
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + 'profiles?email=' + localStorage.getItem("uid"),
+        { headers: { 
+          'access-token':  localStorage.getItem("token"),
+          uid:    localStorage.getItem("uid"),
+          client: localStorage.getItem("client"),
+          expiry: localStorage.getItem("expiry"),
+          } 
+        })
+        .then(function (response) {
+          console.log(response)
+          setHeaders(response)
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          console.log(error)
+          reject(error);
+        });
+      });
+    },
     signup({ commit }, creds) {
 
       return new Promise((resolve,reject) => {
         axios.post( BASE_URL + 'auth',{
           email: creds.email,
           password: creds.password,
-          password_confirmation: creds.password_confirm
+          password_confirmation: creds.password_confirm,
+          first_name: creds.first_name,
+          last_name: creds.last_name
         })
         .then(function (response) {
           console.log(response)
@@ -62,9 +97,9 @@ export default new Vuex.Store({
           password: creds.password,
         })
         .then(function (response) {
-          let token = response.headers['access-token'];
-          localStorage.setItem("token", token);
+          
           commit(LOGIN_SUCCESS);
+          setHeaders(response)
           resolve();
         })
         .catch(function (error) {

@@ -26,6 +26,24 @@
                     >
                   </v-text-field>
                   <v-text-field  
+                    required
+                    v-model="first_name" 
+                    prepend-icon="person" 
+                    name="first_name" 
+                    label="First name" 
+                    type="text"
+                    >
+                  </v-text-field>
+                  <v-text-field  
+                    required
+                    v-model="last_name" 
+                    prepend-icon="person" 
+                    name="last_name" 
+                    label="Last name" 
+                    type="text"
+                    >
+                  </v-text-field>
+                  <v-text-field  
                     :rules="passwordRules" 
                     required
                     v-model="password" 
@@ -91,6 +109,8 @@
       email: "",
       password: "",
       password_confirm : "",
+      first_name: "",
+      last_name: "",
 
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -113,7 +133,9 @@
                 this.$store.dispatch("signup", {
                     email: this.email,
                     password: this.password,
-                    password_confirmation: this.password_confirm
+                    password_confirmation: this.password_confirm,
+                    first_name: this.first_name,
+                    last_name: this.last_name
                 }).then(() => {
                     this.success = true
                     this.$refs.form.reset()
