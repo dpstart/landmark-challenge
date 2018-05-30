@@ -7,12 +7,12 @@ VAN_GOGH_MUSEUM_DESCRIPTION = "I need ears"
 SAGRADA_FAMILIA_DESCRIPTION = "Ibiza selection on Radio Globo"
 
 create_cities:
-	echo 'City.create(:name => "Rome", :country => "Italy", :id => 0)' | rails c
-	echo 'City.create(:name => "Milan", :country => "Italy", :id => 1)' | rails c
-	echo 'City.create(:name => "London", :country => "United Kingdom", :id => 2)' | rails c
-	echo 'City.create(:name => "Paris", :country => "France", :id => 3)' | rails c
-	echo 'City.create(:name => "Amsterdam", :country => "Netherlands", :id => 4)' | rails c
-	echo 'City.create(:name => "Barcellona", :country => "Spain", :id => 5)' | rails c
+	echo 'City.create(:name => "Rome", :country => "Italy", :latitude => 41.8919300, :longitude => 12.5113300,:id => 0)' | rails c
+	echo 'City.create(:name => "Milan", :country => "Italy", :latitude => 45.4642700, :longitude => 9.1895100, :id => 1)' | rails c
+	echo 'City.create(:name => "London", :country => "United Kingdom", :latitude => 51.509865, :longitude => -0.118092, :id => 2)' | rails c
+	echo 'City.create(:name => "Paris", :country => "France", :latitude => 48.864716, :longitude => 2.349014, :id => 3)' | rails c
+	echo 'City.create(:name => "Amsterdam", :country => "Netherlands", :latitude => 52.370216, :longitude => 4.895168, :id => 4)' | rails c
+	echo 'City.create(:name => "Barcellona", :country => "Spain", :latitude => 41.390205, :longitude => 2.154007, :id => 5)' | rails c
 	
 create_landmarks: create_cities
 	echo 'Landmark.create(:description => ${COLOSSEUM_DESCRIPTION}, :name => "Colosseum", :latitude => 41.890251, :longitude => 12.492373, :city_id => 0, :id => 0)' | rails c
