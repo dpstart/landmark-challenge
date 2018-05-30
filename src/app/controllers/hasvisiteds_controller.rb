@@ -1,0 +1,2 @@
+class HasvisitedsController < ApplicationController
+end

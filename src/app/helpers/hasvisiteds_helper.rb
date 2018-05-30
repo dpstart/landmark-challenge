@@ -1,0 +1,2 @@
+module HasvisitedsHelper
+end

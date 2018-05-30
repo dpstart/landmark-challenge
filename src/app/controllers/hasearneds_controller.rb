@@ -1,0 +1,2 @@
+class HasearnedsController < ApplicationController
+end
