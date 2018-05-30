@@ -23,6 +23,23 @@ create_landmarks: create_cities
 	echo 'Landmark.create(:description => ${VAN_GOGH_MUSEUM_DESCRIPTION}, :name => "Van Gogh Museum", :latitude => 52.358415, :longitude => 4.881075, :city_id => 4, :id => 5)' | rails c
 	echo 'Landmark.create(:description => ${SAGRADA_FAMILIA_DESCRIPTION}, :name => "Sagrada Familia", :latitude => 41.402165, :longitude => 2.171332, :city_id => 5, :id => 6)' | rails c
 
+create_users:
+	echo 'User.create(:email => "luca@gmail.com", :password => "passpass", :password_confirmation => "passpass", :id => 0)' | rails c
+	echo 'User.create(:email => "daniele@gmail.com", :password => "passpass", :password_confirmation => "passpass", :id => 1)' | rails c
+	
+create_profiles:
+	echo 'Profile.create(:first_name => "Luca", :last_name => "Ferrera", :user_id => 0,:id => 0)' | rails c
+	echo 'Profile.create(:first_name => "Daniele", :last_name => "Cappuccio", :user_id => 1, :id => 1)' | rails c
+
+create_achievements:
+	echo 'Achievement.create(:name => "Colosseum", :description => "See the Colosseum", :color => "bronze", :id => 0)' | rails c
+	echo 'Achievement.create(:name => "Big Ben", :description => "See the Big Ben", :color => "silver", :id => 1)' | rails c
+
+create_has_earned:
+	echo 'HasEarned.create(:achievement_id => 0, :profile_id => 0)' | rails c
+	echo 'HasEarned.create(:achievement_id => 0, :profile_id => 1)' | rails c
+	echo 'HasEarned.create(:achievement_id => 1, :profile_id => 1)' | rails c
+
 clean_cities:
 	echo 'City.delete_all' | rails c
 	

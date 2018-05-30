@@ -24,8 +24,8 @@ end
 Given("There is at least one city") do
   query = {
     :city => {
-      :name => "Rome",
-      :country => "Italy"
+      :name => "Madrid",
+      :country => "Spain"
     }
   }
   url = 'http://localhost:3000/citys'
@@ -41,10 +41,10 @@ end
 When("I request to create a new landmark") do
   query ={
     :landmark => {
-      :name => "Colosseum",
-      :description => "The most important monument in Rome",
-      :latitude => 41.890251,
-      :longitude => 12.492373,
+      :name => "El Prado",
+      :description => "The most important museum of Madrid",
+      :latitude => 40.4083317, 
+      :longitude => -3.688830578,
       :city_id => $city_id
     }
   }
@@ -55,12 +55,11 @@ When("I request to create a new landmark") do
                                                                   "expiry" => @expiry,
                                                                   "uid" => @uid
                                                                   })  
-  p landmark_res.parsed_response
   city_id = landmark_res.parsed_response['city_id']
   landmark_id = landmark_res.parsed_response['landmark_id']
 
   query = {
-    :name => "Rome"
+    :name => "Madrid"
   }
   url = 'http://localhost:3000/citys/' + city_id.to_s
   res = HTTParty.delete(url, :query => query, :headers => { "access-token" => @admin_token,
@@ -71,7 +70,7 @@ When("I request to create a new landmark") do
                                                           })
 
   query = {
-    :name => "Colosseum"
+    :name => "El Prado"
   }
   url = 'http://localhost:3000/landmarks/' + landmark_id.to_s
   res = HTTParty.delete(url, :query => query, :headers => { "access-token" => @admin_token,

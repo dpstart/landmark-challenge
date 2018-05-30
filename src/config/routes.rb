@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
   get '/citys/find_id_by_name', to: 'citys#find_id_by_name'  
   resources :citys
+
+  get '/profiles/achievements', to: 'profiles#achievements'
+  get '/profiles/goals', to: 'profiles#goals'
   resources :profiles
   
   root to: 'landing#index'

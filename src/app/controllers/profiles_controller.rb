@@ -34,7 +34,34 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def goals
+        @achievements = Achievement.all.to_a
+        p @achievements
+        @has_earned = HasEarned.where(:profile_id => profile_id).to_a
+        p @has_earned
+        res = []
+        @has_earned.each do |has_earned|
+            res << has_earned.achievement
+        end
+        @goals = @achievements - res
+        render :json => @goals
+    end
+
+    def achievements
+        @has_earned = HasEarned.where(:profile_id => profile_id).to_a
+        res = []
+        @has_earned.each do |achievement|
+            res << achievement
+        end 
+        render :json => res
+    end
+
     private
+        def profile_id 
+            @user_id = User.find_by(:email => params[:email]).id
+            @profile_id = Profile.find_by(:user_id => @user_id).id
+        end
+
         def failure(msg)
             render :json => { :status => "error", :message => msg }, status: 401
         end
