@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   resources :profiles
   
   root to: 'landing#index'
+
+  post 'landmark_detection', to: 'landmark_detection#detection'
 end
