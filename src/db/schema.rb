@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_18_012042) do
+ActiveRecord::Schema.define(version: 2018_05_30_132828) do
 
   create_table "achievements", force: :cascade do |t|
     t.string "name"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2018_05_18_012042) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
   end
 
   create_table "has_earneds", force: :cascade do |t|
@@ -62,7 +64,7 @@ ActiveRecord::Schema.define(version: 2018_05_18_012042) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "profile_id"
-    t.integer "achievement"
+    t.integer "achievement_id"
   end
 
   create_table "has_visiteds", force: :cascade do |t|
