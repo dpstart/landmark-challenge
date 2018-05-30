@@ -5,8 +5,8 @@ class LandmarkDetectionController < ApplicationController
     require "google/cloud/vision"
     require "open-uri"
     def detection
-        safe_image()
-        vision = Google::Cloud::Vision.new project: "landmark_project_204915"
+        save_image()
+        vision = Google::Cloud::Vision.new project: "landmark_project_204915", keyfile: "landmark-project-204915-6d53d7010a1e.json"
         image  = vision.image "landmark.jpg"
 
         image.landmarks.each do |landmark|
