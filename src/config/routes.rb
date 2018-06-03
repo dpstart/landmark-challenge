@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get '/profiles/achievements', to: 'profiles#achievements'
   get '/profiles/goals', to: 'profiles#goals'
   resources :profiles
+
+  resources :hasearneds
+  resources :hasvisiteds
   
   root to: 'landing#index'
 end
