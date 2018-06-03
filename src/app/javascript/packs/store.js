@@ -4,32 +4,37 @@ import axios from 'axios';
 
 Vue.use(Vuex)
 
-const LOGIN = "LOGIN";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGIN_ERROR = "LOGIN_ERROR";
-const LOGOUT = "LOGOUT";
+const LOGIN = "LOGIN"
+const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+const LOGIN_ERROR = "LOGIN_ERROR"
+const LOGOUT = "LOGOUT"
 
 const SIGNUP = "SIGNUP"
 const SIGNUP_SUCCESS = "SIGNUP_SUCCESS"
 
+const RETRIEVE_LANDMARKS = "RETRIEVE_LANDMARKS"
+
 const BASE_URL = "http://localhost:3000/"
 
 function setHeaders(response){
-  let token = response.headers['access-token'];
+  //let token = response.headers['access-token'];
   let uid = response.headers['uid'];
   let client = response.headers['client'];
-  let expiry = response.headers['expiry'];
-  localStorage.setItem("token", token);
+  //let expiry = response.headers['expiry'];
+ // localStorage.setItem("token", token);
   localStorage.setItem("uid", uid);
   localStorage.setItem("client", client);
-  localStorage.setItem("expiry", expiry);
+  //localStorage.setItem("expiry", expiry);
 }
 
 export default new Vuex.Store({
+  
   state: {
     isLoggedIn: !!localStorage.getItem("token"),
-    pending: false
+    pending: false,
+    landmarks: []
   },
+
   mutations: {
     [LOGIN] (state) {
       state.pending = true;
@@ -43,11 +48,16 @@ export default new Vuex.Store({
     },
     [LOGIN_ERROR] (state) {
       state.pending = false;
+    },
+    [RETRIEVE_LANDMARKS] (state, data) {
+      state.landmarks = data;
     }
+
   },
+
   actions: {
 
-    profile( {commit} ) {
+    profile({commit}) {
       return new Promise((resolve,reject) => {
         axios.get( BASE_URL + 'profiles?email=' + localStorage.getItem("uid"),
         { headers: { 
@@ -58,15 +68,36 @@ export default new Vuex.Store({
           } 
         })
         .then(function (response) {
-          console.log(response)
           setHeaders(response)
           resolve(response.data);
         })
         .catch(function (error) {
-          console.log(error)
           reject(error);
         });
       });
+    },
+    getCities({commit} ) {
+        return new Promise((resolve,reject) => {
+          axios.get( BASE_URL + "citys")
+            .then(function (response) {
+              resolve(response.data)
+            })
+            .catch(function (error) {
+              reject(error)
+            });
+        })
+    },
+    getLandmarksForCity({commit}, data) {
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "landmarks?city=" + data.city)
+          .then(function (response) {
+            commit(RETRIEVE_LANDMARKS, response.data) 
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
     },
     signup({ commit }, creds) {
 
@@ -99,7 +130,14 @@ export default new Vuex.Store({
         .then(function (response) {
           
           commit(LOGIN_SUCCESS);
-          setHeaders(response)
+          let token = response.headers['access-token'];
+          let uid = response.headers['uid'];
+          let client = response.headers['client'];
+          let expiry = response.headers['expiry'];
+          localStorage.setItem("token", token);
+          localStorage.setItem("uid", uid);
+          localStorage.setItem("client", client);
+          localStorage.setItem("expiry", expiry);
           resolve();
         })
         .catch(function (error) {
@@ -119,6 +157,9 @@ export default new Vuex.Store({
      },
      isPending: state => {
       return state.pending
+     },
+     getLandmarks: state => {
+       return state.landmarks
      }
   }
 });  

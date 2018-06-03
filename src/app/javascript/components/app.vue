@@ -14,7 +14,7 @@
               <img src="https://randomuser.me/api/portraits/men/85.jpg" >
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>John Doe</v-list-tile-title>
+              <v-list-tile-title>{{first_name}} {{last_name}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -87,12 +87,12 @@
        <v-toolbar-items class="hidden-sm-and-down">
           <v-menu offset-y>
             <v-btn  flat slot="activator"  dark>
-              {{ current.title }}
+              {{ current.name }}
               <v-icon right dark>arrow_drop_down</v-icon>
               </v-btn>
             <v-list>
-              <v-list-tile v-for="(item, index) in items" :key="index" @click="current=item">
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile v-for="(item, index) in cities" :key="index" @click="current=item">
+                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -122,16 +122,15 @@
 
 <script>
 
-
   export default {
     data: () => ({
       drawer: false,
 
-      items: [
-        { title: 'Rome' },
-      ],
+      cities: [],
+      current:  { },
 
-      current:  { title: "Rome" }
+      first_name: '',
+      last_name:''
     }),
     props: {
       source: String
@@ -141,12 +140,37 @@
         this.$store.dispatch('logout');
         this.$router.push('/')
         this.drawer =  false;
+      },
+
+      getLandmarks(city) {
+        this.$store.dispatch("getLandmarksForCity", {city: city})
+        //TODO: handle
+        .catch(error => {})
       }
     },
     computed: {
       isLoggedIn () {
         return this.$store.getters.isLoggedIn;
       }
+    },
+    created () {
+      this.$store.dispatch("getCities")
+        .then ((response) => {
+          this.cities = response;
+          this.current = response[0]
+
+          this.getLandmarks(this.current.name)
+        })
+    },
+    updated () {
+      this.$store.dispatch("profile")
+        .then((response) => {
+          this.first_name = response.first_name;
+          this.last_name = response.last_name;
+        }) 
+        .catch ( (error)  => {
+          //TODO: handle
+        })
     }
   }
 </script>

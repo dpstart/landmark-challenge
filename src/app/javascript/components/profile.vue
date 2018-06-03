@@ -57,8 +57,7 @@ export default {
         this.first_name = response.first_name;
         this.last_name = response.last_name;
         this.bio = response.bio;
-      })
-      
+      }) 
   }  
 }
 

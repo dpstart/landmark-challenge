@@ -16,8 +16,10 @@
                 <v-flex xs12>
                   <v-card color="blue-grey" class="white--text">
                     <v-card-title primary-title>
-                      <div class="headline">{{elem.name}}</div>
-                      <div>{{elem.desc}}</div>
+                      <div>
+                        <h3 class="headline mb-0">{{elem.name}}</h3>
+                        <div>{{elem.description}}</div>
+                       </div>
                     </v-card-title>
                     <v-card-actions>
                       <v-btn @click="pan(index)">See on map</v-btn>
@@ -33,6 +35,8 @@
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex'
 
 //TODO: Sepearate into 2 components, use vuex to communicate.
 
@@ -50,6 +54,7 @@ function getContentString (name, desc) {
     return content;
   }
 
+
 export default {
   name: 'google-map',
   props: ['name'],
@@ -61,18 +66,24 @@ export default {
       markers: [],
 
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
-
-      monumentData: [
-        { name: "Colosseo", 
-          desc: "The Colosseum or Coliseum also known as the Flavian Amphitheatre is an oval amphitheatre in the centre of the city of Rome, Italy.",
-          latitude: 41.8902,
-          longitude: 12.4922 },
-        { name: "Baths of Caracalla", 
-          desc: "The Baths of Caracalla (Italian: Terme di Caracalla) in Rome, Italy, were the city's second largest Roman public baths, or thermae, likely built between AD 212 (or 211) and 216/217, during the reigns of emperors Septimius Severus and Caracalla.",
-          latitude: 41.879040,
-          longitude: 12.492439}
-      ]
     }
+  },
+
+  watch: {
+
+    //Watch for changes, then call function to handle map and cards. 
+    monumentData: {
+      handler:function (newData) {
+        this.makeMapAndCards()
+      },
+      deep:true
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      monumentData: 'getLandmarks'
+    })
   },
   methods: {
     pan (index) {
@@ -91,40 +102,41 @@ export default {
           break;
         }
       }
+    },
+
+    makeMapAndCards: function () {
+
+      this.bounds = new google.maps.LatLngBounds();
+      const element = document.getElementById(this.mapName)
+      const mapCentre = {latitude: this.monumentData[0].latitude, longitude: this.monumentData[0].longitude}
+      const options = {
+        center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
+      }
+      this.map = new google.maps.Map(element, options);
+      this.monumentData.forEach((data) => {
+        const position = new google.maps.LatLng(data.latitude, data.longitude);
+        const marker = new google.maps.Marker({ 
+          position,
+          map: this.map,
+          icon: {
+            size: new google.maps.Size(55, 55),
+            scaledSize: new google.maps.Size(55, 55),
+            url: "https://d30y9cdsu7xlg0.cloudfront.net/png/7224-200.png"
+          }
+        });
+        marker.setTitle(data.name);
+        this.markers.push(marker)
+        this.map.fitBounds(this.bounds.extend(position))
+        marker.addListener('click', function() {
+
+            var infowindow = new google.maps.InfoWindow({
+              content: getContentString(data.name, data.description)
+            });
+            infowindow.open(this.map, marker);
+          });
+      });
     }
   },
-  mounted: function () {
-    
-    this.bounds = new google.maps.LatLngBounds();
-    const element = document.getElementById(this.mapName)
-    const mapCentre = {latitude:this.monumentData[0].latitude, longitude: this.monumentData[0].longitude}
-    const options = {
-      center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
-    }
-    this.map = new google.maps.Map(element, options);
-    this.monumentData.forEach((data) => {
-      const position = new google.maps.LatLng(data.latitude, data.longitude);
-      const marker = new google.maps.Marker({ 
-        position,
-        map: this.map,
-        icon: {
-          size: new google.maps.Size(55, 55),
-          scaledSize: new google.maps.Size(55, 55),
-          url: "https://d30y9cdsu7xlg0.cloudfront.net/png/7224-200.png"
-        }
-      });
-      marker.setTitle(data.name);
-      this.markers.push(marker)
-      this.map.fitBounds(this.bounds.extend(position))
-      marker.addListener('click', function() {
-
-           var infowindow = new google.maps.InfoWindow({
-            content: getContentString(data.name, data.desc)
-           });
-          infowindow.open(this.map, marker);
-        });
-    });
-  }
 };
 </script>
 <style scoped>
@@ -134,5 +146,4 @@ export default {
   margin: 0 auto;
   background: gray;
 }
-
 </style>
