@@ -54,7 +54,6 @@ export default new Vuex.Store({
     }
 
   },
-
   actions: {
 
     profile({commit}) {

@@ -1,4 +1,3 @@
-
 <template>
   <div id='home'>
         <v-layout>

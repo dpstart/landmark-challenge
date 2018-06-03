@@ -23,6 +23,7 @@
                     </v-card-title>
                     <v-card-actions>
                       <v-btn @click="pan(index)">See on map</v-btn>
+                      <v-btn :to="{name: 'Landmark', params: {name: elem.name, data: elem}}">Go to page</v-btn>
                     </v-card-actions>
                   </v-card> 
                 </v-flex>
@@ -137,6 +138,10 @@ export default {
       });
     }
   },
+  mounted () {
+      if (typeof this.monumentData !== 'undefined' && this.monumentData.length > 0) 
+        this.makeMapAndCards()
+  }
 };
 </script>
 <style scoped>

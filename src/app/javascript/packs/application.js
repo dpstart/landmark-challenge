@@ -21,6 +21,8 @@ import Profile from '../components/profile.vue'
 import Login from '../components/login.vue'
 import Register from '../components/register.vue'
 import Drop from '../components/drop.vue'
+import EditProfile from '../components/edit-profile.vue'
+import Landmark from '../components/landmark.vue'
 
 import store from './store.js'
 
@@ -31,9 +33,11 @@ const router =  new Router({
   routes:  [
     { path: '/', name: "Home", component: Home },
     { path: '/profile', name: "Profile",  component: Profile },
+    { path: '/profile/edit', name: "EditProfile",  component: EditProfile },
     { path: '/login', name: "Login",  component: Login },
     { path: '/register', name: "Register",  component: Register},
-    { path: '/drop', name: "Drop",  component: Drop}
+    { path: '/drop', name: "Drop",  component: Drop},
+    { path: '/landmark/:name', name: "Landmark",  component: Landmark, props: true}
   ]
 })
 
