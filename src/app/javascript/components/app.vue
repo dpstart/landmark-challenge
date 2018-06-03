@@ -86,7 +86,7 @@
         </v-btn>
        <v-toolbar-items class="hidden-sm-and-down">
           <v-menu offset-y>
-            <v-btn  flat slot="activator"  dark>
+            <v-btn flat slot="activator" dark>
               {{ current.name }}
               <v-icon right dark>arrow_drop_down</v-icon>
               </v-btn>
@@ -130,8 +130,20 @@
       current:  { },
 
       first_name: '',
-      last_name:''
+      last_name:'',
     }),
+
+    watch: {
+
+    //Watch for changes, then call function to handle map and cards. 
+    current: {
+      handler:function (newData) {
+        this.getLandmarks(this.current.name)
+      },
+      deep:true
+    }
+  },
+
     props: {
       source: String
     },
