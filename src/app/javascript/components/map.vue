@@ -95,7 +95,7 @@ export default {
 
       for(var i = 0 ; i< this.markers.length; i++){
         var infowindow = new google.maps.InfoWindow({
-            content: getContentString(this.monumentData[index].name, this.monumentData[index].desc)
+            content: getContentString(this.monumentData[index].name, this.monumentData[index].description)
            });
         
         if(this.markers[i].getTitle() == this.monumentData[index].name){
