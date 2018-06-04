@@ -27,11 +27,12 @@ class LandmarkDetectionController < ApplicationController
     end
 
     def create_visit(name, lat, long, user_id)
-        landmark_id = Landmark.find_by(:name => name).id
+        landmark = Landmark.find_by(:name => name)
+        landmark_id = landmark.id
         profile_id = Profile.find_by(:user_id => user_id).id
         @hasvisited = HasVisited.new(:landmark_id => landmark_id, :profile_id => profile_id)
         if @hasvisited.save
-            render :json => { :status => 'success', :hasvisited => @hasvisited}, status: 200
+            render :json => { :status => 'success', :hasvisited => @hasvisited, :landmark => landmark}, status: 200
         else
             render :json => { :status => 'error', :message => @hasvisited.errors.details}, status: 401
         end
