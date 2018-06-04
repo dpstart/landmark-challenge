@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'landing/index'
   get 'welcome/index'
 
+  get '/landmarks/visited', to:'landmarks#visited'
   resources :landmarks
 
   get '/citys/find_id_by_name', to: 'citys#find_id_by_name'  
