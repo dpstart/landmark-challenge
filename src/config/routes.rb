@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'landing/index'
   get 'welcome/index'
 
+  get '/landmarks/visited', to:'landmarks#visited'
   resources :landmarks
 
   get '/citys/find_id_by_name', to: 'citys#find_id_by_name'  
@@ -26,10 +27,13 @@ Rails.application.routes.draw do
 
   get '/profiles/achievements', to: 'profiles#achievements'
   get '/profiles/goals', to: 'profiles#goals'
+  get '/profiles/reputation', to:'profiles#reputation'
   resources :profiles
 
   resources :hasearneds
   resources :hasvisiteds
   
   root to: 'landing#index'
+
+  post 'landmark_detection', to: 'landmark_detection#detection'
 end

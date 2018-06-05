@@ -28,11 +28,15 @@ export default {
     return {
       gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
       dropzoneOptions: {
-          url: 'https://httpbin.org/post',
+          url: 'http://localhost:3000/landmark_detection',
           thumbnailWidth: 220,
           maxFilesize: 0.5,
-          
-         // headers: { "My-Awesome-Header": "header value" }
+          headers: {"access-token":localStorage.getItem("token"),
+                    "expiry":localStorage.getItem("expiry"),
+                    "client":localStorage.getItem("client"),
+                    "token-type":"Bearer",
+                    "uid":localStorage.getItem("uid")
+                    }
       }
     }
   }

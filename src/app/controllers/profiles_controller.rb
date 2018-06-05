@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
 
-    before_action :authenticate_user!, only: [:index]
+    before_action :authenticate_user!, only: [:index, :edit]
 
     # Only admins should be able to use this action
     def all
@@ -34,6 +34,29 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def edit
+        profile = Profile.find_by(:user_id => params[:id])
+        if params[:first_name] != nil
+            profile.first_name = params[:first_name]
+        end        
+        if params[:last_name] != nil
+            profile.last_name = params[:last_name]
+        end        
+        if params[:bio] != nil
+            profile.bio = params[:bio]
+        end
+        if params[:reputation] != nil
+            profile.reputation = params[:reputation]
+        end    
+        if profile.save 
+            render :json => { :status => 'success', :message => 'Profile edited successfully'}, status: 201
+        else
+            render :json => { :status => 'error', :message => 'Profile not edited'}, status: 400
+        end
+
+        
+    end
+
     def goals
         @achievements = Achievement.all.to_a
         p @achievements
@@ -44,7 +67,7 @@ class ProfilesController < ApplicationController
             res << has_earned.achievement
         end
         @goals = @achievements - res
-        render :json => @goals
+        render :json => { :status => 'success', :goals => @goals}, status: 201
     end
 
     def achievements
@@ -53,7 +76,12 @@ class ProfilesController < ApplicationController
         @has_earned.each do |achievement|
             res << achievement
         end 
-        render :json => res
+        render :json => { :status => 'success', :achievements => res}, status: 201
+    end
+
+    def reputation
+        profile = Profile.find_by(:user_id => current_user.id)
+        render :json => { :status => 'success', :reputation => profile.reputation}, status: 201
     end
 
     private

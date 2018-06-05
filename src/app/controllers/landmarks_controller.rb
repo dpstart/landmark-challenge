@@ -47,6 +47,17 @@ class LandmarksController < ApplicationController
         end
     end
 
+    def visited
+        profile = Profile.find_by(:user_id => current_user.id)
+        hasVisited = HasVisited.where(:profile => profile)
+        visited = []
+        hasVisited.each do |i|
+            landmark = Landmark.find_by(:id => i.landmark_id)
+            visited << landmark
+        end
+        render :json => { :status => 'success', :landmarks => visited}, status: 201
+    end
+
     private
 
         def landmark_params
