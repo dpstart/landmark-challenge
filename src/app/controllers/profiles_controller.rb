@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
             res << has_earned.achievement
         end
         @goals = @achievements - res
-        render :json => @goals
+        render :json => { :status => 'success', :goals => @goals}, status: 201
     end
 
     def achievements
@@ -53,7 +53,12 @@ class ProfilesController < ApplicationController
         @has_earned.each do |achievement|
             res << achievement
         end 
-        render :json => res
+        render :json => { :status => 'success', :achievements => res}, status: 201
+    end
+
+    def reputation
+        profile = Profile.find_by(:user_id => current_user.id)
+        render :json => { :status => 'success', :reputation => profile.reputation}, status: 201
     end
 
     private
