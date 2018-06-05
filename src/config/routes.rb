@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :hasvisiteds
   
   root to: 'landing#index'
+
+  post 'landmark_detection', to: 'landmark_detection#detection'
 end
