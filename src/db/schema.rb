@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_124111) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "profile_id"
-    t.integer "achievement"
+    t.integer "achievement_id"
   end
 
   create_table "has_visiteds", force: :cascade do |t|

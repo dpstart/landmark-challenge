@@ -36,4 +36,13 @@ Rails.application.routes.draw do
   root to: 'landing#index'
 
   post 'landmark_detection', to: 'landmark_detection#detection'
+
+  # Administration
+  get '/administration/stats', to: 'administration#stats'
+  get '/administration/users', to: 'administration#users'
+  get '/administration/admins', to: 'administration#admins'
+  get '/administration/landmarks', to: 'administration#landmarks'
+  get '/administration/cities', to: 'administration#cities'
+  get '/administration/delete_user', to: 'administration#delete_user'
+  get '/administration/new_admin', to: 'administration#new_admin'
 end
