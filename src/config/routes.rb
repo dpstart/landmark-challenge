@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'custom_omniauth_callbacks#omniauth_success'
 
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    registrations: 'registrations' 
+    registrations: 'registrations',
+    confirmations: 'confirmations' 
   } 
   
   # Check if a user (providing email as parameter) has already registered
