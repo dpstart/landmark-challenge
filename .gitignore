@@ -6,4 +6,4 @@ node_modules/
 yarn.lock
 src/config/ENV.yml
 src/landmark-challenge-4f26e0aeca60.json
-src/config/initializers/devise.rb
+src/config/environments/development.rb
