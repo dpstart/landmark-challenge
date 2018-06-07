@@ -1,4 +1,5 @@
 class LandmarkDetectionController < ApplicationController
+    
     before_action :authenticate_user!, only: [:detection]
 
     require "google/cloud/vision"

@@ -36,9 +36,9 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => 'landmark-challenge',
-    :password => 'landmark1',
-    :domain => 'localhost:3000',
+    :user_name => 'landmark_challenge',
+    :password => 'landmark1$',
+    :domain => 'landmark-challenge.herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,

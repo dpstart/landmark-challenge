@@ -18,12 +18,21 @@ const BASE_URL = "http://localhost:3000/"
 
 function setHeaders(response){
   //let token = response.headers['access-token'];
-  let uid = response.headers['uid'];
+  let expiry = response.headers['expiry'];
   let client = response.headers['client'];
+  let token = response.headers['token'];
+  let uid = response.headers['uid'];
   //let expiry = response.headers['expiry'];
  // localStorage.setItem("token", token);
-  localStorage.setItem("uid", uid);
-  localStorage.setItem("client", client);
+  
+  if (token)
+    localStorage.setItem("token", token);
+  if (expiry)
+    localStorage.setItem("expiry", expiry);
+  if (client)
+    localStorage.setItem("client", client);
+  if (uid)
+    localStorage.setItem("uid", uid);
   //localStorage.setItem("expiry", expiry);
 }
 
