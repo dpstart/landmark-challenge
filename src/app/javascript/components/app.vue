@@ -175,14 +175,14 @@
         })
     },
     updated () {
-      this.$store.dispatch("profile")
+      /*this.$store.dispatch("profile")
         .then((response) => {
           this.first_name = response.first_name;
           this.last_name = response.last_name;
         }) 
         .catch ( (error)  => {
           //TODO: handle
-        })
+        })*/
     }
   }
 </script>
