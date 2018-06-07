@@ -23,13 +23,13 @@ class CustomOmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
         redirect_to 'http://localhost:3000/#/error/?' + 'message=' + 'error in saving to database! Perhaps you previously signed up with this email? ;)'
         return
       end
-      
       name = @resource["name"]
       first_name = name.split(' ')[0]
-      last_name = name.split(' ')[1]      
-      @resource.profile = Profile.new(:first_name => first_name, :last_name => last_name)
-      @resource.save
-
+      last_name = name.split(' ')[1]
+      if @resource.profile == nil     
+        @resource.profile = Profile.new(:first_name => first_name, :last_name => last_name)
+        @resource.save
+      end
       yield @resource if block_given?
 
       logger.info '[INFO]'.blue + ' ' + @auth_params.to_s
