@@ -37,7 +37,7 @@ class LandmarkDetectionController < ApplicationController
         landmark_id = landmark.id
         profile_id = Profile.find_by(:user_id => user_id).id
         if HasVisited.where(:profile_id => profile_id, :landmark_id => landmark_id) 
-            render :json => { :status => 'error', :message => "You have already visited " + name }, status: 400
+            render :json => { :status => 'error', :message => "You have already visited " + name }, status: 200
             return
         end
         @hasvisited = HasVisited.new(:landmark_id => landmark_id, :profile_id => profile_id)

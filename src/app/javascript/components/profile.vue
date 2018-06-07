@@ -22,6 +22,31 @@
             <v-btn flat color="primary">Explore</v-btn>
           </v-card-actions>
           </v-card>
+          </v-flex>
+      </v-layout>
+    </v-container>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 fluid class="text-xs-center">
+          <v-card>
+            <v-toolbar color="cyan" dark>
+              <v-toolbar-title>Places you visited</v-toolbar-title>
+            </v-toolbar>
+            <v-list three-line>
+              <template v-for="(item, index) in visited">
+                <v-list-tile  :key="item.name" avatar>
+                  <v-list-tile-avatar>
+                    <img :src="url">
+                  </v-list-tile-avatar>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
+                    <v-list-tile-sub-title v-html="item.description"></v-list-tile-sub-title>
+                    <v-list-tile-sub-title><i>{{item.latitude}}  -  {{item.longitude}}</i></v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </template>
+            </v-list>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -37,7 +62,10 @@ export default {
       
       first_name: '',
       last_name: '',
-      bio: ''
+      bio: '',
+
+      visited: {},
+      url: "http://www.artribune.com/wp-content/uploads/2016/07/Colosseo-roma-696x464.jpg"
     } 
   },
   beforeRouteEnter (to, from, next) {
@@ -49,8 +77,8 @@ export default {
       }
       else next()
   },
+
   created() {
-  
     this.$store.dispatch("profile")
       .then( (response) => {
         console.log(response);
@@ -58,6 +86,10 @@ export default {
         this.last_name = response.last_name;
         this.bio = response.bio;
       }) 
+  },
+  mounted() {
+      this.$store.dispatch("getVisited")
+        .then(response => {this.visited = response; console.log(response)})
   }  
 }
 
