@@ -44,6 +44,7 @@
                     >
                   </v-text-field>
                   <v-text-field
+                    v-model="user.bio"
                     name="bio"
                     label="bios"
                     textarea
@@ -51,7 +52,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="primary"  @click="">EDIT</v-btn>
+                <v-btn color="primary"  @click="updateProfile">EDIT</v-btn>
               </v-card-actions>
             </v-card>
             <v-snackbar
@@ -89,6 +90,25 @@
           this.user = response
           this.user.email = localStorage.getItem("uid")
         }) 
+    },
+    methods: {
+        updateProfile () {
+
+            if (true) {
+                this.$store.dispatch("updateProfile", {
+                    first_name: this.user.first_name,
+                    last_name: this.user.last_name,
+                    bio: this.user.bio
+                }).then(() => {
+                    this.success = true
+                })
+                .catch((errors) => {
+                    console.log(errors)
+                    this.errors = errors
+                    this.error = true
+                });
+            }
+        }
     }
   }
 </script>

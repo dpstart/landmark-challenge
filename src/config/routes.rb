@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/profiles/achievements', to: 'profiles#achievements'
   get '/profiles/goals', to: 'profiles#goals'
   get '/profiles/reputation', to:'profiles#reputation'
+  post '/profiles/edit', to: 'profiles#edit'
   resources :profiles
 
   resources :hasearneds

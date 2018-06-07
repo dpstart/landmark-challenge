@@ -35,7 +35,11 @@ class ProfilesController < ApplicationController
     end
 
     def edit
-        profile = Profile.find_by(:user_id => params[:id])
+        email = params[:email]
+        logger.info "email is " + email
+        user_id = User.find_by(:email => email)
+        logger.info "user id is " + user_id.to_s
+        profile = Profile.find_by(:user_id => user_id)
         if params[:first_name] != nil
             profile.first_name = params[:first_name]
         end        
@@ -45,16 +49,14 @@ class ProfilesController < ApplicationController
         if params[:bio] != nil
             profile.bio = params[:bio]
         end
-        if params[:reputation] != nil
-            profile.reputation = params[:reputation]
-        end    
+        #if params[:reputation] != nil
+        #    profile.reputation = params[:reputation]
+        #end    
         if profile.save 
             render :json => { :status => 'success', :message => 'Profile edited successfully'}, status: 201
         else
             render :json => { :status => 'error', :message => 'Profile not edited'}, status: 400
-        end
-
-        
+        end    
     end
 
     def goals
