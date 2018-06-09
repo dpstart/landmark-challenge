@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get '/profiles/goals', to: 'profiles#goals'
   get '/profiles/reputation', to:'profiles#reputation'
   post '/profiles/edit', to: 'profiles#edit'
+  post '/profiles/delete', to: 'profiles#delete_account'
   resources :profiles
 
   resources :hasearneds

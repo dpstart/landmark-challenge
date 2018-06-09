@@ -103,6 +103,26 @@ export default new Vuex.Store({
         })
       })
     },
+    deleteAccount({commit}) {
+      return new Promise((resolve,reject) => {
+        axios.post( BASE_URL + 'profiles/delete?email=' + localStorage.getItem("uid") ,
+          { headers: {
+            'access-token':  localStorage.getItem("token"),
+            uid:    localStorage.getItem("uid"),
+            client: localStorage.getItem("client"),
+            expiry: localStorage.getItem("expiry"),
+          }
+          })
+        .then(function(response) {
+          console.log("Account deleted")
+          setHeaders(response)
+          resolve(response.data)
+        })
+        .catch(function(error) {
+          reject(error)
+        })
+      })
+    },
     getVisited({commit}) {
       return new Promise((resolve,reject) => {
         axios.get( BASE_URL + "landmarks/visited?email=" + localStorage.getItem("uid"), 
