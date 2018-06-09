@@ -328,6 +328,20 @@ export default new Vuex.Store({
           });
       })
     },
+    newLandmark({commit}, data){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + 
+          "administration/new_landmark?name=" + data.name + "&description=" + data.description + "&city=" + data.city +
+          "&latitude=" + data.latitude + "&longitude=" + data.longitude)
+          .then(function (response) {
+            console.log(response)
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
     loginAdmin({ commit }, creds) {
       commit(LOGIN); // show spinner
 

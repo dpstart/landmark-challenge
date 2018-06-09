@@ -19,6 +19,7 @@ class LandmarkDetectionController < ApplicationController
             @landmark_longitude = location.longitude
           end
         end
+        p @landmark_name
         create_visit(@landmark_name, @landmark_latitude, @landmark_longitude,user.id)
     end
     private
@@ -32,7 +33,7 @@ class LandmarkDetectionController < ApplicationController
         first_visit = true
         landmark = Landmark.find_by(:name => name)
         if landmark == nil 
-            render :json => { :status => 'error', :message => name + " in not in our list of landmarks"}, status: 400
+            render :json => { :status => 'error', :message => name.to_s + " in not in our list of landmarks"}, status: 400
             return
         end
         landmark_id = landmark.id
