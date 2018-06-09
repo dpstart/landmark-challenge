@@ -30,6 +30,7 @@ class LandmarkDetectionController < ApplicationController
     end
 
     def create_visit(name, lat, long, user_id)
+        first_visit = true
         landmark = Landmark.find_by(:name => name)
         if landmark == nil 
             render :json => { :status => 'error', :message => name.to_s + " in not in our list of landmarks"}, status: 400
@@ -42,12 +43,31 @@ class LandmarkDetectionController < ApplicationController
             render :json => { :status => 'error', :message => "You have already visited " + name }, status: 200
             return
         end
+        if HasVisited.where(:profile_id => profile_id).exists?
+            first_visit = false
+        end
         @hasvisited = HasVisited.new(:landmark_id => landmark_id, :profile_id => profile_id)
         if @hasvisited.save
+            if first_visit
+                achievement_id = Achievement.find_by(:name => "Welcome").id
+                @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement_id)
+                @hasearned.save
+            end
+            nVisit = howManyVisited(profile_id)
+            if nVisit >= 3
+                achievement_id = Achievement.find_by(:name => "Visit 5 landmarks").id
+                @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement_id)
+                @hasearned.save
+            end
             render :json => { :status => 'success', :hasvisited => @hasvisited, :landmark => landmark}, status: 200
         else
             render :json => { :status => 'error', :message => @hasvisited.errors.details}, status: 400
         end
+    end
+
+    def howManyVisited(profile_id)
+        visited = HasVisited.where(:profile_id => profile_id)
+        visited.size 
     end
 
 end
