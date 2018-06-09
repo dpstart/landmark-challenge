@@ -19,7 +19,6 @@
               </v-card-text>
           <v-card-actions>
             <v-btn flat color="primary" :to="{name: 'EditProfile'}">Edit</v-btn>
-            <v-btn flat color="primary">Explore</v-btn>
           </v-card-actions>
           </v-card>
           </v-flex>
@@ -28,7 +27,7 @@
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 fluid class="text-xs-center">
-          <v-card>
+          <v-card v-if="hasVisited">
             <v-toolbar color="cyan" dark>
               <v-toolbar-title>Places you visited</v-toolbar-title>
             </v-toolbar>
@@ -92,6 +91,10 @@ export default {
           next(false)
       }
       else next()
+  },
+
+  computed: {
+    hasVisited: function () { return this.visited.length > 0 }
   },
 
   created() {

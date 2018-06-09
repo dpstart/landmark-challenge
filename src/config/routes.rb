@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get '/profiles/goals', to: 'profiles#goals'
   get '/profiles/reputation', to:'profiles#reputation'
   post '/profiles/edit', to: 'profiles#edit'
+  post '/profiles/delete', to: 'profiles#delete_account'
   resources :profiles
 
   resources :hasearneds
@@ -47,4 +48,6 @@ Rails.application.routes.draw do
   get '/administration/cities', to: 'administration#cities'
   get '/administration/delete_user', to: 'administration#delete_user'
   get '/administration/new_admin', to: 'administration#new_admin'
+  get '/administration/new_city', to: 'administration#new_city'
+  get '/administration/new_landmark', to: 'administration#new_landmark'
 end

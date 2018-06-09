@@ -7,7 +7,7 @@
       fixed
       app
     >
-      <v-toolbar flat class="transparent" v-if="isLoggedIn">
+      <!--<v-toolbar flat class="transparent" v-if="isLoggedIn">
         <v-list class="pa-0">
           <v-list-tile :to="{name: 'Profile'}" @click.stop="drawer = !drawer" avatar>
             <v-list-tile-avatar>
@@ -18,7 +18,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
-      </v-toolbar>
+      </v-toolbar>-->
       <v-list dense>
         <v-divider></v-divider>
         <v-list-tile :to="{name: 'Home'}" @click.stop="drawer = !drawer">

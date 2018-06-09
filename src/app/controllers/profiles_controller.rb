@@ -59,6 +59,17 @@ class ProfilesController < ApplicationController
         end    
     end
 
+    def delete_account
+        email = params[:email]
+        user_id = User.find_by(:email => email)
+        profile = Profile.find_by(:user_id => user_id)
+        if profile.destroy && user_id.destroy
+            render :json => { :status => 'success', :message => 'Account deleted' }, status: 201
+        else
+            render :json => { :status => 'error', :message => 'Account not found or not deleted' }, status: 400
+        end
+    end
+
     def goals
         @achievements = Achievement.all.to_a
         p @achievements
