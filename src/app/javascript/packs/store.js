@@ -85,7 +85,6 @@ export default new Vuex.Store({
       });
     },
     updateProfile({commit}, data) {
-      console.log("hello" + data)
       return new Promise((resolve,reject) => {
         axios.post( BASE_URL + 'profiles/edit?email=' + localStorage.getItem("uid") + '&first_name=' + data.first_name + '&last_name=' + data.last_name + '&bio=' + data.bio,
           { headers: {
@@ -96,8 +95,6 @@ export default new Vuex.Store({
           }
           })
         .then(function(response) {
-          console.log("porco")
-          console.log("Profile update sent")
           setHeaders(response)
           resolve(response.data)
         })
@@ -128,7 +125,7 @@ export default new Vuex.Store({
     },
     getVisited({commit}) {
       return new Promise((resolve,reject) => {
-        axios.get( BASE_URL + "landmarks/visited", 
+        axios.get( BASE_URL + "landmarks/visited?email=" + localStorage.getItem("uid"), 
         { headers: { 
           'access-token':  localStorage.getItem("token"),
           uid:    localStorage.getItem("uid"),
@@ -179,7 +176,6 @@ export default new Vuex.Store({
           last_name: creds.last_name
         })
         .then(function (response) {
-          console.log(response)
           resolve();
         })
         .catch( (error) => {

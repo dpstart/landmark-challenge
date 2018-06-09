@@ -48,7 +48,10 @@ class LandmarksController < ApplicationController
     end
 
     def visited
-        profile = Profile.find_by(:user_id => current_user.id)
+        email = params[:email]
+        logger.info "email is " + email
+        user_id = User.find_by(:email => email).id
+        profile = Profile.find_by(:user_id => user_id)
         hasVisited = HasVisited.where(:profile => profile)
         visited = []
         hasVisited.each do |i|

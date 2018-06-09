@@ -136,10 +136,10 @@
     watch: {
 
     //Watch for changes, then call function to handle map and cards. 
-    current: {
-      handler:function (newData) {
-        this.getLandmarks(this.current.name)
-      },
+      current: {
+        handler:function (newData) {
+          this.getLandmarks(this.current.name)
+        },
       deep:true
     }
   },
@@ -168,6 +168,7 @@
     created () {
       this.$store.dispatch("getCities")
         .then ((response) => {
+          console.log(response)
           this.cities = response;
           this.current = response[0]
 
