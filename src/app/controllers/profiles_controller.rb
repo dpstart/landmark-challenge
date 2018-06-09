@@ -75,7 +75,8 @@ class ProfilesController < ApplicationController
     def achievements
         @has_earned = HasEarned.where(:profile_id => profile_id).to_a
         res = []
-        @has_earned.each do |achievement|
+        @has_earned.each do |earned|
+            achievement= Achievement.find_by(:id => earned.achievement_id)
             res << achievement
         end 
         render :json => { :status => 'success', :achievements => res}, status: 201
