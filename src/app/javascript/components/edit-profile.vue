@@ -46,7 +46,7 @@
                   <v-text-field
                     v-model="user.bio"
                     name="bio"
-                    label="bios"
+                    label="bio"
                     textarea
                   ></v-text-field>
                 </v-form>
