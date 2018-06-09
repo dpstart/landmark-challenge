@@ -211,6 +211,112 @@ export default new Vuex.Store({
         });
       });
     },
+    getStats({commit}){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/stats")
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    getUsers({commit}){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/users")
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    getAdmins({commit}){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/admins")
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    getCities({commit}){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/cities")
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    getLandmarks({commit}){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/landmarks")
+          .then(function (response) {
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    newCity({commit}, data){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/new_city?name=" + data.name + "&country=" + data.country)
+          .then(function (response) {
+            console.log(response)
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    newAdmin({commit}, data){
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "administration/new_admin?email=" + data.email + "&password=" + data.password)
+          .then(function (response) {
+            console.log(response)
+            resolve(response.data)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
+    loginAdmin({ commit }, creds) {
+      commit(LOGIN); // show spinner
+
+      return new Promise((resolve,reject) => {
+        axios.post( BASE_URL + 'admin/auth/sign_in',{
+          email: creds.email,
+          password: creds.password,
+        })
+        .then(function (response) {
+          
+          commit(LOGIN_SUCCESS);
+          let token = response.headers['access-token'];
+          let uid = response.headers['uid'];
+          let client = response.headers['client'];
+          let expiry = response.headers['expiry'];
+          localStorage.setItem("admin-token", token);
+          localStorage.setItem("uid", uid);
+          localStorage.setItem("client", client);
+          localStorage.setItem("expiry", expiry);
+          resolve();
+        })
+        .catch(function (error) {
+          commit(LOGIN_ERROR);
+          reject(error);
+        });
+      });
+    },
     logout({ commit }) {
       localStorage.removeItem("token");
       commit(LOGOUT);

@@ -19,7 +19,6 @@
               </v-card-text>
           <v-card-actions>
             <v-btn flat color="primary" :to="{name: 'EditProfile'}">Edit</v-btn>
-            <v-btn flat color="primary">Explore</v-btn>
           </v-card-actions>
           </v-card>
           </v-flex>
