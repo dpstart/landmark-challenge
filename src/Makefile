@@ -16,12 +16,12 @@ create_cities:
 	
 create_landmarks: create_cities
 	echo 'Landmark.create(:description => ${COLOSSEUM_DESCRIPTION}, :name => "Colosseum", :latitude => 41.890251, :longitude => 12.492373, :city_id => 0, :img_URL => "https://dotravel.com/uploads/ticket/1234/2017-12-05/Colosseum-Tickets-1.jpg", :id => 0)' | rails c
-	echo 'Landmark.create(:description => ${BATHS_OF_CARACALLA_DESCRIPTION}, :name => "Baths of Caracalla", :latitude => 41.879444, :longitude => 12.492056, :city_id => 0, :id => 1)' | rails c
-	echo 'Landmark.create(:description => ${MILAN_CATHEDRAL_DESCRIPTION}, :name => "Milan Cathedral", :latitude => 45.458536, :longitude => 9.187387, :city_id => 1, :id => 2)' | rails c
-	echo 'Landmark.create(:description => ${BIG_BEN_DESCRIPTION}, :name => "Big Ben", :latitude => 51.500364, :longitude => -0.121432, :city_id => 2, :id => 3)' | rails c
-	echo 'Landmark.create(:description => ${EIFFEL_TOWER_DESCRIPTION}, :name => "Eiffel Tower", :latitude => 48.8583, :longitude => 2.2945, :city_id => 3, :id => 4)' | rails c
-	echo 'Landmark.create(:description => ${VAN_GOGH_MUSEUM_DESCRIPTION}, :name => "Van Gogh Museum", :latitude => 52.358415, :longitude => 4.881075, :city_id => 4, :id => 5)' | rails c
-	echo 'Landmark.create(:description => ${SAGRADA_FAMILIA_DESCRIPTION}, :name => "Sagrada Familia (\"Expiatory Temple of the Holy Family\")", :latitude => 41.402165, :longitude => 2.171332, :city_id => 5, :id => 6)' | rails c
+	echo 'Landmark.create(:description => ${BATHS_OF_CARACALLA_DESCRIPTION}, :name => "Baths of Caracalla", :latitude => 41.879444, :longitude => 12.492056, :city_id => 0, :img_URL => "https://www.romeing.it/wp-content/uploads/2013/02/Baths-of-Caracalla.jpg", :id => 1)' | rails c
+	echo 'Landmark.create(:description => ${MILAN_CATHEDRAL_DESCRIPTION}, :name => "Milan Cathedral", :latitude => 45.458536, :longitude => 9.187387, :city_id => 1, :img_URL => "https://upload.wikimedia.org/wikipedia/commons/f/f9/Milan_Cathedral_2013-09-18.jpg", :id => 2)' | rails c
+	echo 'Landmark.create(:description => ${BIG_BEN_DESCRIPTION}, :name => "Big Ben", :latitude => 51.500364, :longitude => -0.121432, :city_id => 2, :img_URL => "https://mywowo.net/media/images/cache/londra_houses_of_parliament_02_westminster_big_ben_jpg_1200_630_cover_85.jpg", :id => 3)' | rails c
+	echo 'Landmark.create(:description => ${EIFFEL_TOWER_DESCRIPTION}, :name => "Eiffel Tower", :latitude => 48.8583, :longitude => 2.2945, :city_id => 3, :img_URL => "https://www.timeshighereducation.com/sites/default/files/styles/the_breaking_news_image_style/public/paris-eiffel-tower.jpg?itok=eB8Us-bs", :id => 4)' | rails c
+	echo 'Landmark.create(:description => ${VAN_GOGH_MUSEUM_DESCRIPTION}, :name => "Van Gogh Museum", :latitude => 52.358415, :longitude => 4.881075, :city_id => 4, :img_URL => "https://cdn-imgix.headout.com/tour/6156/TOUR-IMAGE/VanGoghMuseum-1.jpg", :id => 5)' | rails c
+	echo 'Landmark.create(:description => ${SAGRADA_FAMILIA_DESCRIPTION}, :name => "Sagrada Familia (\"Expiatory Temple of the Holy Family\")", :latitude => 41.402165, :longitude => 2.171332, :city_id => 5, :img_URL => "https://images.musement.com/cover/0002/37/thumb_136083_cover_header.jpeg", :id => 6)' | rails c
 
 create_users:
 	echo 'User.create(:email => "luca@gmail.com", :password => "passpass", :password_confirmation => "passpass", :id => 0)' | rails c

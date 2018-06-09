@@ -5,7 +5,7 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md8>
             <v-card>
-            <v-card-media  src="https://s3.amazonaws.com/iexplore_web/images/assets/000/005/495/original/dreamstime_m_9856207.jpg?1442331489" height="300px">
+            <v-card-media  :src="computedData.img_URL" height="300px">
             </v-card-media>
               <v-card-title class="justify-center">
                 <h3  class="headline mb-0">{{computedData.name}}</h3>
