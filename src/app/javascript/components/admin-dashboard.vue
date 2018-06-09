@@ -58,7 +58,7 @@
             <br>
           <v-card>
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Add Admin</v-toolbar-title>
+                <v-toolbar-title>Add admin</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form ref="form" lazy-validation>
@@ -80,6 +80,49 @@
                 <v-btn @click="addAdmin({ admin })" color="primary">Add</v-btn>
               </v-card-actions>
             </v-card>
+            <br>
+            <v-card>
+                <v-toolbar dark color="primary">
+                  <v-toolbar-title>Add landmark</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                  <v-form ref="form" lazy-validation>
+                    <v-text-field   
+                      type="text"
+                      label="Name" 
+                      required v-model="landmark.name" 
+                      >
+                    </v-text-field>
+                    <v-text-field   
+                      type="text"
+                      label="Description" 
+                      required v-model="landmark.description" 
+                      >
+                    </v-text-field>
+                    <v-text-field   
+                      type="text"
+                      label="City" 
+                      required v-model="landmark.city" 
+                      >
+                    </v-text-field>
+                    <v-text-field   
+                      type="text"
+                      label="Latitude" 
+                      required v-model="landmark.latitude" 
+                      >
+                    </v-text-field>
+                    <v-text-field   
+                      type="text"
+                      label="Longitude" 
+                      required v-model="landmark.longitude" 
+                      >
+                    </v-text-field>
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn @click="addLandmark({ landmark })" color="primary">Add</v-btn>
+                </v-card-actions>
+              </v-card>
           </v-flex>
           <v-flex xs5 offset-xs1 fluid class="text-xs-center">
             <v-card>
@@ -127,38 +170,6 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs8>
-            <v-card>
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Add city</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-form ref="form" lazy-validation>
-                  <v-text-field   
-                    type="text"
-                    label="Name" 
-                    required v-model="city.name" 
-                    >
-                  </v-text-field>
-                  <v-text-field   
-                    type="text"
-                    label="Country" 
-                    required v-model="city.country" 
-                    >
-                  </v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn @click="addCity({ city })" color="primary">Add</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
     </v-app>
   </div>
 </template>
@@ -174,7 +185,8 @@ export default {
       landmarks: [],
       cities: [],
       city: {name:'', country:''},
-      admin: {email:'', password: ''}
+      admin: {email:'', password: ''},
+      landmark: {name:'', description:'', city:'', latitude:'', longitude:''}
       
     }
 
@@ -215,6 +227,10 @@ export default {
 
     addAdmin(){
       this.$store.dispatch('newAdmin', this.admin)
+    },
+
+    addLandmark(){
+      this.$store.dispatch('newLandmark', this.landmark)
     }
   },
   beforeRouteEnter (to, from, next) {
