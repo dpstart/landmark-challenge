@@ -67,11 +67,11 @@ class AdministrationController < ApplicationController
 		description = params[:description]
 		city_name = params[:city]
 		city = City.find_by(:name => city_name)
-		if !city.nil?
+		if !city
 			render :json => { :status => "error", :message => "City not found. Landmark not created" }, status: 401
 		else 
 			if Landmark.create(name: landmark_name, description: description, city_id: city.id)
-				render :json => Landmark.find_by(:name => landmark_name), status: 200
+				render :json => { :status => "success", :message => "Landmark created" }, status: 200
 			else
 				render :json => { :status => "error", :message => "Error in creating new landmark" }, status: 401
 			end
