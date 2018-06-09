@@ -122,6 +122,25 @@ export default new Vuex.Store({
           });
       })
     },
+    getEarned({commit}) {
+      return new Promise((resolve,reject) => {
+        axios.get( BASE_URL + "profiles/achievements?email=" + localStorage.getItem("uid"), 
+        { headers: { 
+          'access-token':  localStorage.getItem("token"),
+          uid:    localStorage.getItem("uid"),
+          client: localStorage.getItem("client"),
+          expiry: localStorage.getItem("expiry"),
+          }
+        })
+          .then(function (response) {
+            setHeaders(response)
+            resolve(response.data.achievements)
+          })
+          .catch(function (error) {
+            reject(error)
+          });
+      })
+    },
     getCities({commit} ) {
         return new Promise((resolve,reject) => {
           axios.get( BASE_URL + "citys")
