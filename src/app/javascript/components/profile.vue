@@ -89,7 +89,7 @@ export default {
   },
   mounted() {
       this.$store.dispatch("getVisited")
-        .then(response => {this.visited = response; console.log(response)})
+        .then(response => {this.visited = response})
   }  
 }
 
