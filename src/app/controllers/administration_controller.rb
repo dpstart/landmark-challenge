@@ -65,12 +65,14 @@ class AdministrationController < ApplicationController
 	def new_landmark
 		landmark_name = params[:name]
 		description = params[:description]
+		latitude = params[:latitude]
+		longitude = params[:longitude]
 		city_name = params[:city]
 		city = City.find_by(:name => city_name)
 		if !city
 			render :json => { :status => "error", :message => "City not found. Landmark not created" }, status: 401
 		else 
-			if Landmark.create(name: landmark_name, description: description, city_id: city.id)
+			if Landmark.create(name: landmark_name, description: description, latitude: latitude, longitude: longitude, city_id: city.id)
 				render :json => { :status => "success", :message => "Landmark created" }, status: 200
 			else
 				render :json => { :status => "error", :message => "Error in creating new landmark" }, status: 401
