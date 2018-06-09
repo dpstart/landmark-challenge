@@ -46,12 +46,28 @@
               </template>
             </v-list>
           </v-card>
-          <v-card>
+          <v-card v-if="hasEarned">
             <v-toolbar color="cyan" dark>
               <v-toolbar-title>Achievements you earned</v-toolbar-title>
             </v-toolbar>
             <v-list three-line>
               <template v-for="(item, index) in earned">
+                <v-list-tile  :key="item.name" avatar>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
+                    <v-list-tile-sub-title v-html="item.description"></v-list-tile-sub-title>
+                    <v-list-tile-sub-title v-html="item.color"></v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </template>
+            </v-list>
+          </v-card>
+          <v-card v-if="hasGoals">
+            <v-toolbar color="cyan" dark>
+              <v-toolbar-title>Goals</v-toolbar-title>
+            </v-toolbar>
+            <v-list three-line>
+              <template v-for="(item, index) in goals">
                 <v-list-tile  :key="item.name" avatar>
                   <v-list-tile-content>
                     <v-list-tile-title v-html="item.name"></v-list-tile-title>
@@ -80,7 +96,8 @@ export default {
       bio: '',
 
       visited: {},
-      earned:{}
+      earned:{},
+      goals:{}
     } 
   },
   beforeRouteEnter (to, from, next) {
@@ -94,7 +111,9 @@ export default {
   },
 
   computed: {
-    hasVisited: function () { return this.visited.length > 0 }
+    hasVisited: function () { return this.visited.length > 0 },
+    hasEarned: function () { return this.earned.length > 0 },
+    hasGoals: function () { return this.goals.length > 0 }
   },
 
   created() {
@@ -108,14 +127,11 @@ export default {
   },
   mounted() {
       this.$store.dispatch("getVisited")
-        .then(response => {this.visited = response;
-        console.log(this.visited);
-        console.log(response)}),
+        .then(response => {this.visited = response}),
       this.$store.dispatch("getEarned")
-        .then(response => {this.earned = response;
-        console.log("eranred")
-        console.log(this.earned);
-        console.log(response)})
+        .then(response => {this.earned = response}),
+      this.$store.dispatch("getGoals")
+        .then(response => {this.goals = response})        
   }  
 }
 
