@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
 
-    # before_action :authenticate_user!, only: [:index, :edit]
+    before_action :authenticate_user!, only: [:edit]
 
     # Only admins should be able to use this action
     def all
@@ -35,11 +35,7 @@ class ProfilesController < ApplicationController
     end
 
     def edit
-        email = params[:email]
-        logger.info "email is " + email
-        user_id = User.find_by(:email => email)
-        logger.info "user id is " + user_id.to_s
-        profile = Profile.find_by(:user_id => user_id)
+        profile = Profile.find_by(:user_id => current_user.id)
         if params[:first_name] != nil
             profile.first_name = params[:first_name]
         end        

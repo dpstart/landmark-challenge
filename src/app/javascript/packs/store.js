@@ -85,14 +85,19 @@ export default new Vuex.Store({
       });
     },
     updateProfile({commit}, data) {
-      return new Promise((resolve,reject) => {
-        axios.post( BASE_URL + 'profiles/edit?email=' + localStorage.getItem("uid") + '&first_name=' + data.first_name + '&last_name=' + data.last_name + '&bio=' + data.bio,
-          { headers: {
-            'access-token':  localStorage.getItem("token"),
-            uid:    localStorage.getItem("uid"),
-            client: localStorage.getItem("client"),
-            expiry: localStorage.getItem("expiry"),
-          }
+      return new Promise((resolve,reject) => {        
+        axios({ method: 'post', url: BASE_URL + 'profiles/edit',data:{
+            email: localStorage.getItem("uid"),
+            first_name: data.first_name,
+            last_name: data.last_name,
+            bio: data.bio
+          },
+          headers: { 
+              'access-token':  localStorage.getItem("token"),
+              uid:    localStorage.getItem("uid"),
+              client: localStorage.getItem("client"),
+              expiry: localStorage.getItem("expiry"),
+            } 
           })
         .then(function(response) {
           setHeaders(response)
