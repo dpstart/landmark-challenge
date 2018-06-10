@@ -372,6 +372,16 @@ export default new Vuex.Store({
     logout({ commit }) {
       localStorage.removeItem("token");
       commit(LOGOUT);
+    },
+    delete_user({commit},email){
+      axios.post(BASE_URL + 'profiles/delete',{email: email})
+      .then(function (response) {
+        console.log(response)
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        reject(error)
+      });
     }
   },
   getters: {

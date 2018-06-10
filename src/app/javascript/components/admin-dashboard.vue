@@ -131,6 +131,19 @@
               <v-list dense>
                 <v-list-tile v-for="(item, index) in users">
                   <v-list-tile-content><b>{{item.email}}</b></v-list-tile-content>
+                  <v-layout row justify-center>
+                    <v-btn color="primary" dark @click.native.stop="dialog = true">Delete User</v-btn>
+                    <v-dialog v-model="dialog" max-width="290">
+                      <v-card>
+                        <v-card-title class="headline">Are you sure you want delete this user?</v-card-title>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">No</v-btn>
+                          <v-btn color="green darken-1" flat="flat" @click.native="yes(item.email)">Yes</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-layout>
                 </v-list-tile>
               </v-list>
             </v-card>
@@ -186,8 +199,8 @@ export default {
       cities: [],
       city: {name:'', country:''},
       admin: {email:'', password: ''},
-      landmark: {name:'', description:'', city:'', latitude:'', longitude:''}
-      
+      landmark: {name:'', description:'', city:'', latitude:'', longitude:''},
+      dialog: false      
     }
 
   },
@@ -231,6 +244,10 @@ export default {
 
     addLandmark(){
       this.$store.dispatch('newLandmark', this.landmark)
+    },
+    yes(email){
+      this.dialog = false;
+      this.$store.dispatch("delete_user",email)
     }
   },
   beforeRouteEnter (to, from, next) {
