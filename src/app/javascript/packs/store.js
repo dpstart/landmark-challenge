@@ -108,6 +108,28 @@ export default new Vuex.Store({
         })
       })
     },
+    changePassword({commit}, data) {
+      return new Promise((resolve,reject) => {        
+        axios({ method: 'put', url: BASE_URL + 'auth/',data:{
+            password: data.password,
+            password_confirmation: data.password_confirmation
+          },
+          headers: { 
+              'access-token':  localStorage.getItem("token"),
+              uid:    localStorage.getItem("uid"),
+              client: localStorage.getItem("client"),
+              expiry: localStorage.getItem("expiry"),
+            } 
+          })
+        .then(function(response) {
+          setHeaders(response)
+          resolve(response.data)
+        })
+        .catch(function(error) {
+          reject(error)
+        })
+      })
+    },
     deleteAccount({commit}) {
       return new Promise((resolve,reject) => {
         axios.post( BASE_URL + 'profiles/delete?email=' + localStorage.getItem("uid") ,

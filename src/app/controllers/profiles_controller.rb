@@ -55,6 +55,21 @@ class ProfilesController < ApplicationController
         end    
     end
 
+    def password_update
+        email = params[:email]
+        password = params[:password]
+        password_confirmation = params[:password_confirmation]
+        user = User.find_by(:email => email)
+        if !user
+            render :json => { :status => 'error', :message => 'Email not found. Password update failed' }, status: 400
+        else
+            user.password = password
+            user.password_confirmation = password_confirmation
+            user.save
+            render :json => { :status => 'success', :message => 'Password successfully updated' }, status: 201 
+        end
+    end
+
     def delete_account
         email = params[:email]
         user = User.find_by(:email => email)

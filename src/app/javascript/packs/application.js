@@ -22,6 +22,7 @@ import Login from '../components/login.vue'
 import Register from '../components/register.vue'
 import Drop from '../components/drop.vue'
 import EditProfile from '../components/edit-profile.vue'
+import ChangePassword from '../components/change-password.vue'
 import Landmark from '../components/landmark.vue'
 import AdminDashboard from '../components/admin-dashboard.vue'
 import AdminLogin from '../components/admin-login.vue'
@@ -36,6 +37,7 @@ const router =  new Router({
     { path: '/', name: "Home", component: Home },
     { path: '/profile', name: "Profile",  component: Profile },
     { path: '/profile/edit', name: "EditProfile",  component: EditProfile },
+    { path: '/profile/password/edit', name: "ChangePassword", component: ChangePassword },
     { path: '/login', name: "Login",  component: Login },
     { path: '/register', name: "Register",  component: Register},
     { path: '/drop', name: "Drop",  component: Drop},
