@@ -54,9 +54,14 @@ class LandmarkDetectionController < ApplicationController
                 @hasearned.save
             end
             nVisit = howManyVisited(profile_id)
-            if nVisit >= 3
+            if nVisit >= 5
                 achievement_id = Achievement.find_by(:name => "Visit 5 landmarks").id
                 @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement_id)
+                @hasearned.save
+            end
+            achievement = Achievement.find_by(:name => name)
+            if achievement
+                @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement.id)
                 @hasearned.save
             end
             render :json => { :status => 'success', :hasvisited => @hasvisited, :landmark => landmark}, status: 200
