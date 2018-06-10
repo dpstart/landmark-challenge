@@ -37,7 +37,8 @@ class LandmarkDetectionController < ApplicationController
             return
         end
         landmark_id = landmark.id
-        profile_id = Profile.find_by(:user_id => user_id).id
+        profile = Profile.find_by(:user_id => user_id)
+        profile_id = profile.id
         
         if HasVisited.where(:profile_id => profile_id, :landmark_id => landmark_id).exists? 
             render :json => { :status => 'error', :message => "You have already visited " + name }, status: 200
@@ -53,7 +54,7 @@ class LandmarkDetectionController < ApplicationController
                 @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement_id)
                 @hasearned.save
             end
-            nVisit = howManyVisited(profile_id)
+            nVisit = HasVisited.where(:profile_id => profile_id).size
             if nVisit >= 5
                 achievement_id = Achievement.find_by(:name => "Visit 5 landmarks").id
                 @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement_id)
@@ -64,15 +65,11 @@ class LandmarkDetectionController < ApplicationController
                 @hasearned = HasEarned.new(:profile_id => profile_id,:achievement_id => achievement.id)
                 @hasearned.save
             end
+            profile.reputation = HasEarned.where(:profile_id => profile_id).size
+            profile.save
             render :json => { :status => 'success', :hasvisited => @hasvisited, :landmark => landmark}, status: 200
         else
             render :json => { :status => 'error', :message => @hasvisited.errors.details}, status: 400
         end
     end
-
-    def howManyVisited(profile_id)
-        visited = HasVisited.where(:profile_id => profile_id)
-        visited.size 
-    end
-
 end

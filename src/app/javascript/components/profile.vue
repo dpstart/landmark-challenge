@@ -15,6 +15,7 @@
                 <div>
                   <h3  class="headline mb-0">{{first_name}} {{last_name}}</h3>
                   <div>{{bio}}</div>
+                  <div>Reputation: {{reputation}}</div>
                 </div>
               </v-card-text>
           <v-card-actions>
@@ -96,6 +97,7 @@ export default {
       first_name: '',
       last_name: '',
       bio: '',
+      reputation: 0,
 
       visited: {},
       earned:{},
@@ -125,6 +127,7 @@ export default {
         this.first_name = response.first_name;
         this.last_name = response.last_name;
         this.bio = response.bio;
+        this.reputation = response.reputation;
       }) 
   },
   mounted() {
