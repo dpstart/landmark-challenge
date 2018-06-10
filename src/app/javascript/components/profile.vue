@@ -46,6 +46,7 @@
               </template>
             </v-list>
           </v-card>
+          <br>
           <v-card v-if="hasEarned">
             <v-toolbar color="cyan" dark>
               <v-toolbar-title>Achievements you earned</v-toolbar-title>
@@ -62,6 +63,7 @@
               </template>
             </v-list>
           </v-card>
+          <br>
           <v-card v-if="hasGoals">
             <v-toolbar color="cyan" dark>
               <v-toolbar-title>Goals</v-toolbar-title>

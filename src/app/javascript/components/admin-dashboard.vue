@@ -32,6 +32,14 @@
           </v-card>
           <br>
           <v-card>
+              <div>
+                  <v-alert v-model="addCityError" type="error" dismissible>
+                  Error.
+                  </v-alert>
+                  <v-alert v-model="addCitySuccess" type="success" dismissible>
+                  Success.
+                  </v-alert>
+                </div>
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Add city</v-toolbar-title>
               </v-toolbar>
@@ -57,6 +65,14 @@
             </v-card>
             <br>
           <v-card>
+              <div>
+                  <v-alert v-model="addAdminError" type="error" dismissible>
+                  Error.
+                  </v-alert>
+                  <v-alert v-model="addAdminSuccess" type="success" dismissible>
+                  Success.
+                  </v-alert>
+                </div>
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Add admin</v-toolbar-title>
               </v-toolbar>
@@ -82,6 +98,14 @@
             </v-card>
             <br>
             <v-card>
+                <div>
+                  <v-alert v-model="addLandmarkError" type="error" dismissible>
+                  Error.
+                  </v-alert>
+                  <v-alert v-model="addLandmarkSuccess" type="success" dismissible>
+                  Success.
+                  </v-alert>
+                </div>
                 <v-toolbar dark color="primary">
                   <v-toolbar-title>Add landmark</v-toolbar-title>
                 </v-toolbar>
@@ -200,7 +224,15 @@ export default {
       city: {name:'', country:''},
       admin: {email:'', password: ''},
       landmark: {name:'', description:'', city:'', latitude:'', longitude:''},
-      dialog: false      
+      dialog: false,
+      
+      addCityError: false,
+      addCitySuccess: false,
+      addAdminError: false,
+      addAdminSuccess: false,
+      addLandmarkError: false,
+      addLandmarkSuccess: false,
+
     }
 
   },
@@ -236,14 +268,20 @@ export default {
 
     addCity(){
       this.$store.dispatch('newCity', this.city)
+        .then(response => this.addCitySuccess = true)
+        .catch(error=> this.addCityError = true)
     },
 
     addAdmin(){
       this.$store.dispatch('newAdmin', this.admin)
+        .then(response => this.addAdminSuccess = true)
+        .catch(error=> this.addAdminError = true)
     },
 
     addLandmark(){
       this.$store.dispatch('newLandmark', this.landmark)
+        .then(response => this.addLandmarkSuccess = true)
+        .catch(error => this.addLandmarkError = true)
     },
     yes(email){
       this.dialog = false;
