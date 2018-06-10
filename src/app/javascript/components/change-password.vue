@@ -36,7 +36,7 @@
                     v-model="user.password" 
                     prepend-icon="person" 
                     name="password" 
-                    label="Password" 
+                    label="New password" 
                     type="password"
                     >
                   </v-text-field>
@@ -45,7 +45,7 @@
                     v-model="user.password_confirmation" 
                     prepend-icon="person" 
                     name="password_confirmation" 
-                    label="Password Confirmation" 
+                    label="Confirm new password" 
                     type="password"
                     >
                   </v-text-field>
