@@ -19,6 +19,7 @@ import Map from '../components/map.vue'
 import Home from '../components/home.vue'
 import Profile from '../components/profile.vue'
 import Login from '../components/login.vue'
+import ResetPassword from '../components/reset-password.vue'
 import Register from '../components/register.vue'
 import Drop from '../components/drop.vue'
 import EditProfile from '../components/edit-profile.vue'
@@ -39,6 +40,7 @@ const router =  new Router({
     { path: '/profile/edit', name: "EditProfile",  component: EditProfile },
     { path: '/profile/password/edit', name: "ChangePassword", component: ChangePassword },
     { path: '/login', name: "Login",  component: Login },
+    { path: '/reset-password', name: "ResetPassword", component: ResetPassword },
     { path: '/register', name: "Register",  component: Register},
     { path: '/drop', name: "Drop",  component: Drop},
     { path: '/landmark/:name', name: "Landmark",  component: Landmark, props: true},

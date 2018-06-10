@@ -37,7 +37,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <a  color="primary" style="margin-left:10px">FORGOT PASSWORD</a>
+                <a color="primary"><router-link to="/reset-password"> FORGOT PASSWORD</router-link></a>
                 <a  color="primary"><router-link  to="/register">REGISTER</router-link></a>
                 <v-spacer></v-spacer>
                 <v-progress-circular v-if="isPending" indeterminate color="primary"></v-progress-circular>

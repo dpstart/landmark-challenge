@@ -130,6 +130,23 @@ export default new Vuex.Store({
         })
       })
     },
+    resetPassword({commit}, data) {
+      return new Promise((resolve,reject) => {        
+        axios({ method: 'post', url: BASE_URL + 'auth/password',data:{
+            email: data.email,
+            redirect_url: 'http://localhost:3000/'
+          },
+          headers: { 
+            } 
+          })
+        .then(function(response) {
+          resolve(response.data)
+        })
+        .catch(function(error) {
+          reject(error)
+        })
+      })
+    },
     deleteAccount({commit}) {
       return new Promise((resolve,reject) => {
         axios.post( BASE_URL + 'profiles/delete?email=' + localStorage.getItem("uid") ,
