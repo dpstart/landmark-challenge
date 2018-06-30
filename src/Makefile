@@ -42,6 +42,10 @@ create_has_earned:
 	echo 'HasEarned.create(:achievement_id => 0, :profile_id => 1)' | rails c
 	echo 'HasEarned.create(:achievement_id => 1, :profile_id => 1)' | rails c
 
+populate_db:
+	make create_landmarks
+	make create_achievements
+
 clean_cities:
 	echo 'City.delete_all' | rails c
 	
@@ -63,6 +67,7 @@ create_admin: clean_admins
 	echo 'Admin.create(email: "admin@example.com", password: "12345678", password_confirmation: "12345678")' | rails c
 
 install:
+	bundle install
 	cd ../ && yarn install
 	yarn install
 
